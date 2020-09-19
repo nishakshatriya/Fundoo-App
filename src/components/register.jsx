@@ -15,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/styles/withStyles';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const styles = (theme) => ({
 	root: {
@@ -96,6 +97,76 @@ const styles = (theme) => ({
 });
 
 class user extends Component {
+	state = {
+		username: 'User name',
+		staticText: '@gmail.com',
+		validate: true,
+		firstName: '',
+		lastName: '',
+		emailId: '',
+		password: null,
+		confirmPw: null,
+		count: 0,
+		showPassword: false,
+	};
+
+	handleChange = (prop) => (event) => {
+		this.setState({ [prop]: event.target.value });
+	};
+
+	updateState = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	handleClickShowPassword = () => {
+		this.setState({ showPassword: !this.state.showPassword });
+	};
+
+	handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
+
+	validateInfo = async () => {
+		const regexp = /[A-Za-z]{3,20}$/;
+		const regexp1 = /[A-Za-z0-9]{6,30}$/;
+		const regexPswd = /[A-Za-z0-9@#$%^&*]{8,20}$/;
+
+		if (!regexp.test(this.state.firstName)) {
+			await this.setState({ firstName: '', validate: false });
+			console.log(this.state.validate);
+		}
+
+		if (!regexp.test(this.state.lastName)) {
+			await this.setState({ lastName: ' ', validate: false });
+			console.log(this.state.validate);
+		}
+
+		if (!regexp1.test(this.state.emailId)) {
+			await this.setState({ emailId: ' ', validate: false });
+		}
+
+		if (!regexPswd.test(this.state.password)) {
+			await this.setState({ password: '', validate: false });
+		}
+
+		if (this.state.password !== this.state.confirmPw) {
+			await this.setState({ confirmPw: '', validate: false });
+		}
+
+		return this.state.validate;
+	};
+
+	handleSubmit = async (event) => {
+		const userData = {
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			emailId: this.state.emailId,
+			password: this.state.password,
+		};
+
+		(await this.validateInfo()) ? this.props.userDetails(userData) : this.props.userDetails();
+	};
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -110,12 +181,19 @@ class user extends Component {
 									<TextField
 										label="First name"
 										type="text"
+										value={this.state.firstName}
 										className={classes.textField}
 										name="firstName"
 										variant="outlined"
 										size="small"
 										margin="normal"
+										onChange={this.updateState}
 									/>
+									{this.state.firstName === '' ? (
+										<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
+											enter valid firstname
+										</FormHelperText>
+									) : null}
 								</Grid>
 
 								<Grid item xs={12} sm={6}>
@@ -123,22 +201,54 @@ class user extends Component {
 										label="Last name"
 										type="text"
 										name="lastName"
+										value={this.state.lastName}
 										className={classes.textField}
 										variant="outlined"
 										size="small"
 										margin="normal"
+										onChange={this.updateState}
 									/>
+									{this.state.lastName === '' ? (
+										<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
+											enter valid lastname
+										</FormHelperText>
+									) : null}
 								</Grid>
 								<Grid item xs={12}>
-									<TextField
-										label="Username"
-										type="text"
-										name="username"
-										className={classes.textField}
+									<FormControl
+										className={clsx(classes.margin, classes.textField)}
 										variant="outlined"
 										size="small"
 										margin="normal"
-									/>
+									>
+										<InputLabel htmlFor="outlined-adornment-emailid">
+											{this.state.username}
+										</InputLabel>
+										<OutlinedInput
+											id="outlined-adornment-weight"
+											value={this.state.emailId}
+											onChange={this.handleChange('emailId')}
+											endAdornment={
+												<InputAdornment position="end">{this.state.staticText}</InputAdornment>
+											}
+											aria-describedby="outlined-weight-helper-text"
+											inputProps={{
+												'aria-label': 'emailId',
+											}}
+											
+										/>
+										{this.state.emailId === '' ? (
+											<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
+												sorry, your username must be be between 6 and 30 characters long
+											</FormHelperText>
+										) : null}
+
+										{/* {this.props.emailHandleStatus === false ? (
+											<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
+												That Username is taken, Try another
+											</FormHelperText>
+										) : null} */}
+									</FormControl>
 								</Grid>
 								<p className={classes.combinationText}>You can use letters, numbers and periods</p>
 								<a className={classes.currentAccount} href="#">
@@ -147,29 +257,78 @@ class user extends Component {
 								</a>
 
 								<Grid item xs={12} sm={6}>
-									<TextField
-										label="Password"
-										type="password"
-										name="password"
-										className={classes.textField}
+									<FormControl
+										className={clsx(classes.margin, classes.textField)}
 										variant="outlined"
 										size="small"
-										margin="normal"
-									/>
+									>
+										<InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+										<OutlinedInput
+											id="outlined-adornment-password"
+											type={this.state.showPassword ? 'text' : 'password'}
+											value={this.state.password}
+											onChange={this.handleChange('password')}
+											endAdornment={
+												<InputAdornment position="end">
+													<IconButton
+														aria-label="toggle password visibility"
+														onClick={this.handleClickShowPassword}
+														onMouseDown={this.handleMouseDownPassword}
+														edge="end"
+													>
+														{this.state.showPassword ? (
+															<VisibilityIcon />
+														) : (
+															<VisibilityOffIcon />
+														)}
+													</IconButton>
+												</InputAdornment>
+											}
+											labelWidth={70}
+										/>
+									</FormControl>
+									{this.state.password === '' ? (
+										<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
+											Use 8 characters or more for your password
+										</FormHelperText>
+									) : null}
 								</Grid>
 								<Grid item xs={12} sm={6}>
-									<TextField
-										label="Confirm"
-										type="password"
-										name="confirm"
-										className={classes.textField}
+									<FormControl
+										className={clsx(classes.margin, classes.textField)}
 										variant="outlined"
 										size="small"
-										margin="normal"
-									/>
+									>
+										<InputLabel htmlFor="outlined-adornment-password">Confirm</InputLabel>
+										<OutlinedInput
+											type={this.state.showPassword ? 'text' : 'password'}
+											value={this.state.confirmPw}
+											onChange={this.handleChange('confirmPw')}
+											endAdornment={
+												<InputAdornment position="end">
+													<IconButton
+														aria-label="toggle password visibility"
+														onClick={this.handleClickShowPassword}
+														onMouseDown={this.handleMouseDownPassword}
+														edge="end"
+													>
+														{this.state.showPassword ? (
+															<VisibilityIcon />
+														) : (
+															<VisibilityOffIcon />
+														)}
+													</IconButton>
+												</InputAdornment>
+											}
+											labelWidth={70}
+										/>
+									</FormControl>
+									{this.state.confirmPw === '' ? (
+										<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
+											Those password didn't match try again
+										</FormHelperText>
+									) : null}
 								</Grid>
-								<VisibilityOffIcon className=""></VisibilityOffIcon>
-
 								<p className={classes.passwordCombination}>
 									Use 8 or more with mix of letters, numbers and symbol
 								</p>
