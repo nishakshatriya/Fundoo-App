@@ -4,6 +4,7 @@ import Logo from "../assets/google2.0.0.jpg";
 import '../css/login.css'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Link} from "react-router-dom";
 
 const useStyles = (theme) => ({
     textField: {
@@ -82,19 +83,22 @@ const useStyles = (theme) => ({
 
               <div className={classes.lastdiv}>
               <div className="dropdown">
-                <button onClick={this.myFunction} className="dropbtn"><span className="dropdownbtn">Create account</span></button>
+                {/* <button onClick={this.myFunction} className="dropbtn"><span className="dropdownbtn">Create account</span></button>
                   <div id="myDropdown" className="dropdown-content">
-                   <p onClick={this.goToRegisterPage}> For myself</p>
-                    <p onClick={this.goToRegisterPage}>To manage my bussiness</p>
+                   <p onClick={this.RegistrationPage}> For myself</p>
+                    <p onClick={this.RegistrationPage}>To manage my bussiness</p>
     
-                  </div>
+                  </div> */}
+                   <Link to={"/createAccount"} className="sign-link">
+                      Sign Up Instead
+                    </Link>
               </div>
               <Button
               className={classes.nextButton}
               variant="contained"
               color="primary"
               href="#contained-buttons"
-              // onClick={this.handleSubmit}
+              onClick={this.handleSubmit}
             >
               Next
             </Button>
