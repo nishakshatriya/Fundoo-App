@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import '../css/register.css';
@@ -235,7 +236,6 @@ class user extends Component {
 											inputProps={{
 												'aria-label': 'emailId',
 											}}
-											
 										/>
 										{this.state.emailId === '' ? (
 											<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
@@ -335,9 +335,9 @@ class user extends Component {
 							</Grid>
 
 							<div className={classes.lastdiv}>
-								<div className={classes.usernameMsg} onClick={this.goToLoginPage}>
-									Sign in instead
-								</div>
+								<Link to={'/'} className="sign-link">
+									Sign In Instead
+								</Link>
 								<Button
 									className={classes.nextButton}
 									variant="contained"

@@ -83,12 +83,6 @@ const useStyles = (theme) => ({
 
               <div className={classes.lastdiv}>
               <div className="dropdown">
-                {/* <button onClick={this.myFunction} className="dropbtn"><span className="dropdownbtn">Create account</span></button>
-                  <div id="myDropdown" className="dropdown-content">
-                   <p onClick={this.RegistrationPage}> For myself</p>
-                    <p onClick={this.RegistrationPage}>To manage my bussiness</p>
-    
-                  </div> */}
                    <Link to={"/createAccount"} className="sign-link">
                       Sign Up Instead
                     </Link>
