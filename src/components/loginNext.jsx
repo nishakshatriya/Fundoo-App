@@ -82,7 +82,7 @@ class LoginPageNext extends Component {
 						className={classes.nextButton}
 						variant="contained"
 						color="primary"
-						href="#contained-buttons"
+						href="/loginNext"
 						onClick={this.handleSubmit}
 					>
 						Next
