@@ -57,6 +57,11 @@ const useStyles = (theme) => ({
 		fontWeight:'lighter',
 		fontSize:'13px',
 		color:'blue'
+	},
+
+	errorTexts: {
+		fontSize:'12px',
+		color:'red'
 	}
 });
 
@@ -177,13 +182,13 @@ class ResetPassword extends Component {
 						/>
 					</FormControl>
 				</Grid>
-				<div style={{ fontSize: 12, color: 'red' }}>{this.state.passwordError}</div>
+				<div className={classes.errorTexts}>{this.state.passwordError}</div>
                 <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-						<InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
+						<InputLabel htmlFor="outlined-adornment-new-password">New Password</InputLabel>
 						<OutlinedInput
 							label="New Password"
-							id="outlined-adornment-password"
+							id="outlined-adornment-new-password"
 							type={this.state.showPassword ? 'text' : 'password'}
 							value={this.state.newpassword}
 							onChange={this.handleChange('newpassword')}
@@ -203,10 +208,10 @@ class ResetPassword extends Component {
 						/>
 					</FormControl>
 				</Grid>
-				<div style={{ fontSize: 12, color: 'red' }}>{this.state.newpasswordError}</div>
+				<div className={classes.errorTexts}>{this.state.newpasswordError}</div>
                 <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-						<InputLabel htmlFor="outlined-adornment-password">Re-enter Password</InputLabel>
+						<InputLabel htmlFor="outlined-adornment-reenterpassword">Re-enter Password</InputLabel>
 						<OutlinedInput
 							label="Re-enter Password"
 							id="outlined-adornment-password re-enter"
@@ -229,7 +234,7 @@ class ResetPassword extends Component {
 						/>
 					</FormControl>
 				</Grid>
-				<div style={{ fontSize: 12, color: 'red' }}>{this.state.reenterpasswordError}</div>
+				<div className={classes.errorTexts}>{this.state.reenterpasswordError}</div>
 				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p>
 
 				<div className={classes.lastdiv}>
