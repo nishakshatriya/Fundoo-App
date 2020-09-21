@@ -73,6 +73,7 @@ const initial = {
 	reenterpasswordError:''
 };
 
+const passwordRegexpattern = '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
 class ResetPassword extends Component {
 	state = {
 		validate: true,
@@ -107,15 +108,15 @@ class ResetPassword extends Component {
 		let passwordError = '';
 		let newpasswordError='';
 		let reenterpasswordError='';
-		if (!this.state.password.includes('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')) {
+		if (!this.state.password.includes(passwordRegexpattern)) {
 			passwordError = '**Please Enter Valid Password**';
 		}
 
-		if (!this.state.newpassword.includes('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')) {
+		if (!this.state.newpassword.includes(passwordRegexpattern)) {
 			newpasswordError = '**Password doesnt Match**';
 		}
 
-		if (!this.state.reenterpassword.includes('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')) {
+		if (!this.state.reenterpassword.includes(passwordRegexpattern)) {
 			reenterpasswordError = '**Password doesnt Match**';
 		}
 
