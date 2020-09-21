@@ -33,12 +33,17 @@ const useStyles = (theme) => ({
 	},
 });
 
+const initialState = {
+	password: '',
+	passwordError: '',
+};
 class LoginPageNext extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			emailId: '',
+			password: '',
+			passwordError: '',
 		};
 	}
 
@@ -48,8 +53,31 @@ class LoginPageNext extends Component {
 
 	myFunction = () => {
 		document.getElementById('myDropdown').classList.toggle('show');
-  };
-  
+	};
+
+	validate = () => {
+		let passwordError = '';
+
+		if (!this.state.password) {
+			passwordError = 'please enter valid password';
+		}
+
+		if (passwordError) {
+			this.setState({ passwordError });
+			return false;
+		}
+		return true;
+	};
+
+	handleSubmit = (event) => {
+    event.preventDefault();
+    const isValid = this.validate();
+		if (isValid) {
+			console.log(this.state);
+			this.setState(initialState);
+		}
+	};
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -70,6 +98,7 @@ class LoginPageNext extends Component {
 					margin="normal"
 					onChange={this.updateState}
 				/>
+        <div style={{ fontSize: 12, color: 'red' }}>{this.state.passwordError}</div>
 
 				<div className={classes.lastdiv}>
 					<div className="dropdown">
