@@ -61,7 +61,7 @@ class LoginPage extends Component {
 		let emailError = '';
 
 		if (!this.state.emailId.includes('@')) {
-			emailError = 'invalid Email';
+			emailError = '**Please Enter Valid Email**';
 		}
 
 		if (emailError) {

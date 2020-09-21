@@ -59,7 +59,7 @@ class LoginPageNext extends Component {
 		let passwordError = '';
 
 		if (!this.state.password) {
-			passwordError = 'please enter valid password';
+			passwordError = '**Please Enter Valid Password**';
 		}
 
 		if (passwordError) {
