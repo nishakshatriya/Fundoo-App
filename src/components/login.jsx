@@ -39,14 +39,19 @@ const useStyles = (theme) => ({
   
 });
 
+const initial = {
+  emailId:"",
+  emailError:""
 
+}
 
  class LoginPage extends Component {
    constructor(props) {
      super(props)
-   
+
      this.state = {
-      emailId:""
+      emailId:"",
+      emailError:""
      }
    }
 
@@ -57,6 +62,29 @@ const useStyles = (theme) => ({
    
   myFunction = () =>{
     document.getElementById("myDropdown").classList.toggle("show");
+  }
+
+  validate = () => {
+    let emailError = "";
+
+    if(!this.state.emailId.includes("@")){
+      emailError = "invalid Email"
+    }
+
+    if(emailError){
+      this.setState({emailError});
+      return false;
+    }
+    return true;
+  }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const isValid = this.validate();
+    if(isValid){
+      console.log(this.state);
+      this.setState(initial);
+    }
   }
 
      render() {
@@ -78,6 +106,7 @@ const useStyles = (theme) => ({
                 margin="normal"
                 onChange={this.updateState} 
               />
+              <div style={{fontSize: 12, color:"red"}}>{this.state.emailError}</div>
               <p className={classes.forgotMsg}>Forgot email?</p><br/>
               <p className={classes.browseLinkText}>Not your computer? Use Guest mode to sign in privately.<a style={{ textDecoration: 'none' }}href="https://support.google.com/chrome/answer/6130773?hl=en" className={classes.spantext}> Learn more</a> </p>
 
