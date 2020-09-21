@@ -21,6 +21,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 const useStyles = (theme) => ({
 	textField: {
         width: '100%',
+        paddingBottom:'15px'
 	},
 	forgotMsg: {
 		color: 'cornflowerblue',
