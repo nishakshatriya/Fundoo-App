@@ -45,7 +45,19 @@ const useStyles = (theme) => ({
 	},
 	lastdiv: {
 		paddingBottom: '30px',
-    },
+	},
+	
+	resetText: {
+		marginLeft:'31%',
+		paddingBottom:'10px'
+		
+	},
+
+	CombinationNote : {
+		fontWeight:'lighter',
+		fontSize:'13px',
+		color:'blue'
+	}
 });
 
 const initial = {
@@ -138,7 +150,7 @@ class ResetPassword extends Component {
 		return (
 			<div className="root">
 				<img className="logo" src={Logo} alt="GoogleImage" />
-
+				<p className={classes.resetText}>Reset Password</p>
 				<Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-password">Current Password</InputLabel>
@@ -217,6 +229,7 @@ class ResetPassword extends Component {
 					</FormControl>
 				</Grid>
 				<div style={{ fontSize: 12, color: 'red' }}>{this.state.reenterpasswordError}</div>
+				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p>
 
 				<div className={classes.lastdiv}>
 					<Button
