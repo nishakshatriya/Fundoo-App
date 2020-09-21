@@ -48,15 +48,31 @@ const useStyles = (theme) => ({
     },
 });
 
+const initial = {
+	validate: true,
+	password: '',
+	confirmPw: '',
+	newpassword:'',
+	reenterpassword:'',
+	count: 0,
+	showPassword: false,
+	passwordError:'',
+	newpasswordError:'',
+	reenterpasswordError:''
+};
+
 class ResetPassword extends Component {
 	state = {
 		validate: true,
-		password: null,
-        confirmPw: null,
-        newpassword:null,
-        reenterpassword:null,
+		password:'',
+        confirmPw:'',
+        newpassword:'',
+        reenterpassword:'',
 		count: 0,
 		showPassword: false,
+		passwordError:'',
+		newpasswordError:'',
+		reenterpasswordError:''
 	};
 
 	handleChange = (prop) => (event) => {
@@ -76,17 +92,45 @@ class ResetPassword extends Component {
 	};
 
 	validate = () => {
-		let emailError = '';
-
-		if (!this.state.emailId.includes('@')) {
-			emailError = '**Please Enter Valid Email**';
+		let passwordError = '';
+		let newpasswordError='';
+		let reenterpasswordError='';
+		if (!this.state.password.includes('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')) {
+			passwordError = '**Please Enter Valid Password**';
 		}
 
-		if (emailError) {
-			this.setState({ emailError });
+		if (!this.state.newpassword.includes('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')) {
+			newpasswordError = '**Password doesnt Match**';
+		}
+
+		if (!this.state.reenterpassword.includes('^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$')) {
+			reenterpasswordError = '**Password doesnt Match**';
+		}
+
+		if (passwordError) {
+			this.setState({ passwordError});
+			return false;
+		}
+
+		if (newpasswordError) {
+			this.setState({ newpasswordError});
+			return false;
+		}
+
+		if (reenterpasswordError) {
+			this.setState({ reenterpasswordError});
 			return false;
 		}
 		return true;
+	};
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+		const isValid = this.validate();
+		if (isValid) {
+			console.log(this.state);
+			this.setState(initial);
+		}
 	};
 
 	render() {
@@ -120,6 +164,7 @@ class ResetPassword extends Component {
 						/>
 					</FormControl>
 				</Grid>
+				<div style={{ fontSize: 12, color: 'red' }}>{this.state.passwordError}</div>
                 <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-password">New Password</InputLabel>
@@ -145,6 +190,7 @@ class ResetPassword extends Component {
 						/>
 					</FormControl>
 				</Grid>
+				<div style={{ fontSize: 12, color: 'red' }}>{this.state.newpasswordError}</div>
                 <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-password">Re-enter Password</InputLabel>
@@ -170,6 +216,7 @@ class ResetPassword extends Component {
 						/>
 					</FormControl>
 				</Grid>
+				<div style={{ fontSize: 12, color: 'red' }}>{this.state.reenterpasswordError}</div>
 
 				<div className={classes.lastdiv}>
 					<Button
