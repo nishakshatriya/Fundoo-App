@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Logo from '../assets/google2.0.0.jpg';
-import '../css/login.css';
+import '../css/login.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
