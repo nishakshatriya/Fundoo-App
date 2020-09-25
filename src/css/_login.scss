@@ -6,7 +6,7 @@
   }
   .root{
       border:1px solid lightgrey ;   
-      box-shadow:1px gray $gray-color; 
+      box-shadow:1px $gray-color; 
       border-radius:10px ;
       margin: 2% 8% 10% 10%;
       padding :4%;
@@ -33,12 +33,12 @@
   }
   
   .dropdownbtn{
-    color: cornflowerblue $cornblue;
+    color: $cornblue;
     font-weight: bold;
   }
   
   .dropbtn {
-    background-color: #f1f1f1f1 $background-color;
+    background-color: $background-color;
     color:  #f1f1f1f1;
    
     font-size: 16px;
@@ -47,7 +47,7 @@
   }
   
   .dropbtn:hover, .dropbtn:focus {
-    background-color: rgb(178, 199, 216) $light-blue;
+    background-color: $light-blue;
     padding: 10px;
   }
   
@@ -59,7 +59,7 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: f1f1f1f1;
+    background-color: $background-color;
     min-width: 220px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -67,7 +67,7 @@
   }
   
   .dropdown-content p {
-    color:black $black;
+    color: $black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -99,10 +99,6 @@
             
              font-size: 1.3vw;
           }
-    }
-
-    .spantext {
-      color: 'cornflowerblue'
     }
 
     .dropdownbtn {
