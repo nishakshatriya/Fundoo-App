@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
-import '../css/register.css';
+import '../css/register.scss';
 import googleLogo from '../assets/google2.0.0.jpg';
 import Account from '../assets/account.png';
 import Grid from '@material-ui/core/Grid';
