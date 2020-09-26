@@ -16,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/styles/withStyles';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Axios from 'axios';
 
 const styles = (theme) => ({
 	root: {
@@ -157,15 +158,45 @@ class user extends Component {
 	};
 
 	handleSubmit = async (event) => {
-		const userData = {
+		let userData = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
 			emailId: this.state.emailId,
 			password: this.state.password,
+			confirmPw: this.state.confirmPw
 		};
 
-		(await this.validateInfo()) ? this.props.userDetails(userData) : this.props.userDetails();
+		console.log('asdfg',userData)
+	 await this.createUserAccount(userData);
+
+		// (await this.validateInfo()) ? this.createUserAccount(userData.firstName) : this.createUserAccount();
 	};
+
+	createUserAccount(userData){
+		console.log(userData)
+        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', {
+        "email": userData.emailId,
+        "firstName": userData.firstName,
+        "lastName": userData.lastName,
+        "password": userData.password,
+        "service": "advance",
+    })
+    .then((response) => {
+        console.log(response.data.data);
+        // this.setState({
+        //     snackbarMessage: response.data.data.message,
+        //     snackbarStatus: true,
+        // });
+    })
+    .catch( (error) => {
+        // handle error
+        console.log(error.response);
+        // this.setState({
+        //     snackbarMessage: error.response.data.error.message,
+		// 	snackbarStatus: true,
+        // });
+    });
+ }
 
 	render() {
 		const { classes } = this.props;
