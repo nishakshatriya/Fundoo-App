@@ -180,6 +180,9 @@ class user extends Component {
 		});
 	};
 
+	redirectToLoginPg = () =>{
+		this.props.history.push('/')
+	}
 	createUserAccount(userData) {
 		console.log(userData);
 		Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', {
@@ -193,11 +196,11 @@ class user extends Component {
 				console.log(response.data.data);
 				this.setState({
 					snackbarMessage: response.data.data.message,
-					snackbarStatus: true,
+					snackbarStatus: true,	
 				});
+				this.redirectToLoginPg();
 			})
 			.catch((error) => {
-				// handle error
 				console.log(error.response);
 				this.setState({
 					snackbarMessage: error.response.data.error.message,
