@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import '../css/_register.scss';
 import googleLogo from '../assets/google2.0.0.jpg';
@@ -16,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import withStyles from '@material-ui/styles/withStyles';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Snackbar from '@material-ui/core/Snackbar';
 import Axios from 'axios';
 
 const styles = (theme) => ({
@@ -163,45 +164,62 @@ class user extends Component {
 			lastName: this.state.lastName,
 			emailId: this.state.emailId,
 			password: this.state.password,
-			confirmPw: this.state.confirmPw
+			confirmPw: this.state.confirmPw,
 		};
 
-		console.log('asdfg',userData)
-	 await this.createUserAccount(userData);
+		console.log('asdfg', userData);
+		await this.createUserAccount(userData);
 
 		// (await this.validateInfo()) ? this.createUserAccount(userData.firstName) : this.createUserAccount();
 	};
 
-	createUserAccount(userData){
-		console.log(userData)
-        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', {
-        "email": userData.emailId,
-        "firstName": userData.firstName,
-        "lastName": userData.lastName,
-        "password": userData.password,
-        "service": "advance",
-    })
-    .then((response) => {
-        console.log(response.data.data);
-        // this.setState({
-        //     snackbarMessage: response.data.data.message,
-        //     snackbarStatus: true,
-        // });
-    })
-    .catch( (error) => {
-        // handle error
-        console.log(error.response);
-        // this.setState({
-        //     snackbarMessage: error.response.data.error.message,
-		// 	snackbarStatus: true,
-        // });
-    });
- }
+	handleSnackbarClose = (event, reason) => {
+		console.log(event, reason);
+		this.setState({
+			snackbarStatus: false,
+		});
+	};
+
+	createUserAccount(userData) {
+		console.log(userData);
+		Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', {
+			email: userData.emailId,
+			firstName: userData.firstName,
+			lastName: userData.lastName,
+			password: userData.password,
+			service: 'advance',
+		})
+			.then((response) => {
+				console.log(response.data.data);
+				this.setState({
+					snackbarMessage: response.data.data.message,
+					snackbarStatus: true,
+				});
+			})
+			.catch((error) => {
+				// handle error
+				console.log(error.response);
+				this.setState({
+					snackbarMessage: error.response.data.error.message,
+					snackbarStatus: true,
+				});
+			});
+	}
 
 	render() {
 		const { classes } = this.props;
 		return (
 			<div className={classes.root}>
+				<Snackbar
+					anchorOrigin={{
+						vertical: 'bottom',
+						horizontal: 'center',
+					}}
+					open={this.state.snackbarStatus}
+					onClose={this.handleSnackbarClose}
+					autoHideDuration={2000}
+					message={this.state.snackbarMessage}
+				/>
 				<div classes={classes.firstblock}>
 					<div classes={classes.inputBox}>
 						<img className={classes.logo} src={googleLogo} alt="google-icon"></img>
