@@ -81,8 +81,30 @@ class LoginPage extends Component {
 			this.setState(initial);
 		}
 
+	 let userCredentials = {
+			email:this.state.emailId,
+			password:this.state.password
+		}
+
+		console.log(userCredentials)
+
+		await this.loginWithCredentials(userCredentials);
+	};
+
+	loginWithCredentials(userCredentials) {
+		console.log(userCredentials);
+		Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/login', {
+			"email": userCredentials.email,
+			"password": userCredentials.password,
+		})
+			.then((response) => {
+				console.log(response.data.data);
+			})
+			.catch((error) => {
+				console.log(error.response);
+			});
 	}
-	
+
 	render() {
 		const { classes } = this.props;
 		return (
