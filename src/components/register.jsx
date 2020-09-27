@@ -183,6 +183,7 @@ class user extends Component {
 	redirectToLoginPg = () =>{
 		this.props.history.push('/')
 	}
+	
 	createUserAccount(userData) {
 		console.log(userData);
 		Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', {

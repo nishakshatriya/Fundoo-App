@@ -5,6 +5,7 @@ import '../scss/_login.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
 
 const useStyles = (theme) => ({
 	textField: {
@@ -37,17 +38,18 @@ const useStyles = (theme) => ({
 const initial = {
 	emailId: '',
 	emailError: '',
+	password:''
 };
 
 class LoginPage extends Component {
-	constructor(props) {
-		super(props);
+	
 
-		this.state = {
+		state = {
 			emailId: '',
 			emailError: '',
+			password:''
 		};
-	}
+	
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
@@ -71,15 +73,16 @@ class LoginPage extends Component {
 		return true;
 	};
 
-	handleSubmit = (event) => {
+	handleSubmit = async (event) => {
 		event.preventDefault();
 		const isValid = this.validate();
 		if (isValid) {
 			console.log(this.state);
 			this.setState(initial);
 		}
-	};
 
+	}
+	
 	render() {
 		const { classes } = this.props;
 		return (
@@ -101,6 +104,16 @@ class LoginPage extends Component {
 					onChange={this.updateState}
 				/>
 				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
+				<TextField
+					label="Password"
+					type="text"
+					value={this.state.password}
+					className={classes.textField}
+					name="password"
+					variant="outlined"
+					margin="normal"
+					onChange={this.updateState}
+				/>
 				<p className={classes.forgotMsg}>Forgot email?</p>
 				<br />
 				<p className={classes.browseLinkText}>
