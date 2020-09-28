@@ -43,6 +43,7 @@ const useStyles = (theme) => ({
 	},
 	lastdiv: {
 		paddingBottom: '30px',
+		paddingTop:'30px'
 	},
 	
 	resetText: {
@@ -64,7 +65,7 @@ const useStyles = (theme) => ({
 });
 
 const initial = {
-	email:'',
+
 	validate: true,
 	password: '',
 	confirmPw: '',
@@ -80,7 +81,7 @@ const initial = {
 const passwordRegexpattern = '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
 class ResetPassword extends Component {
 	state = {
-		email:'',
+		
 		validate: true,
 		password:'',
         confirmPw:'',
@@ -117,17 +118,11 @@ class ResetPassword extends Component {
 	};
 
 	validate = () => {
-		let emailError='';
 		let passwordError = '';
 		let newpasswordError='';
 		let reenterpasswordError='';
 
-		if (!this.state.email.includes("@")) {
-			emailError = '**Please Enter Valid email**';
-		}
-		if (!this.state.password.includes(passwordRegexpattern)) {
-			passwordError = '**Please Enter Valid Password**';
-		}
+	
 
 		if (!this.state.newpassword.includes(passwordRegexpattern)) {
 			newpasswordError = '**Password doesnt Match**';
@@ -137,15 +132,6 @@ class ResetPassword extends Component {
 			reenterpasswordError = '**Password doesnt Match**';
 		}
 
-		if (passwordError) {
-			this.setState({ passwordError});
-			return false;
-		}
-
-		if (emailError) {
-			this.setState({ emailError});
-			return false;
-		}
 
 		if (newpasswordError) {
 			this.setState({ newpasswordError});
@@ -167,39 +153,7 @@ class ResetPassword extends Component {
 			this.setState(initial);
 		}
 
-		let emailData = {
-			email: this.state.email
-		}
-
-		console.log(emailData);
-		await this.resetWithEmailId(emailData);
 	};
-
-	redirectToLoginPg = () =>{
-		this.props.history.push('/')
-	}
-
-	resetWithEmailId(emailData){
-        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset', {
-        "email": emailData.email,
-	})
-	
-    .then((response) => {
-        console.log('response====>',response);
-        this.setState({
-            snackbarMessage: response.data.message,
-			snackbarStatus: true,
-		});
-    })
-    .catch( (error) => {
-		// handle error
-        console.log(error.response.data.error.message);
-        this.setState({
-            snackbarMessage: error.response.data.error.message,
-            snackbarStatus: true,
-        });
-	});	
-}
 
 	render() {
 		const { classes } = this.props;
@@ -217,43 +171,7 @@ class ResetPassword extends Component {
 					autoHideDuration={3000}
 					message={this.state.snackbarMessage}
 				/>
-				<TextField
-					label="Email or Phone"
-					type="text"
-					value={this.state.email}
-					className={classes.textField}
-					name="email"
-					variant="outlined"
-					margin="normal"
-					onChange={this.updateState}
-				/>
 				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
-				{/* <Grid item xs={12}>
-					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-						<InputLabel htmlFor="outlined-adornment-password">Current Password</InputLabel>
-						<OutlinedInput
-							label="Current Password"
-							id="outlined-adornment-password"
-							type={this.state.showPassword ? 'text' : 'password'}
-							value={this.state.password}
-							onChange={this.handleChange('password')}
-							endAdornment={
-								<InputAdornment position="end">
-									<IconButton
-										aria-label="toggle password visibility"
-										onClick={this.handleClickShowPassword}
-										onMouseDown={this.handleMouseDownPassword}
-										edge="end"
-									>
-										{this.state.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-									</IconButton>
-								</InputAdornment>
-							}
-							labelWidth={70}
-						/>
-					</FormControl>
-				</Grid>
-				<div className={classes.errorTexts}>{this.state.passwordError}</div>
                 <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-new-password">New Password</InputLabel>
@@ -306,7 +224,7 @@ class ResetPassword extends Component {
 					</FormControl>
 				</Grid>
 				<div className={classes.errorTexts}>{this.state.reenterpasswordError}</div>
-				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p> */}
+				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p>
 
 				<div className={classes.lastdiv}>
 					<Button

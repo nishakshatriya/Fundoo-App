@@ -69,6 +69,10 @@ class LoginPage extends Component {
 		this.setState({ [prop]: event.target.value });
 	};
 
+	myFunction = () => {
+		document.getElementById('myDropdown').classList.toggle('show');
+	};
+
 	handleClickShowPassword = () => {
 		this.setState({ showPassword: !this.state.showPassword });
 	};
@@ -77,9 +81,6 @@ class LoginPage extends Component {
 		event.preventDefault();
 	};
 
-	myFunction = () => {
-		document.getElementById('myDropdown').classList.toggle('show');
-	};
 
 	validate = () => {
 		let emailError = '';
@@ -103,7 +104,7 @@ class LoginPage extends Component {
 	};
 
 	redirectToForgotPasswordPg = () =>{
-		this.props.history.push('/resetPage');
+		this.props.history.push('/forgotPassword');
 	}
 
 	redirectToDashboardPg = () => {

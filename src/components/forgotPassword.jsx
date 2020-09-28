@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Logo from '../assets/google2.0.0.jpg';
 import '../scss/_login.scss';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Axios from 'axios';
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyles = (theme) => ({
 	textField: {
-		width: '100%',
+        width: '100%',
+        paddingBottom:'15px'
 	},
 	forgotMsg: {
 		color: 'cornflowerblue',
-		marginTop: '15%',
+		marginTop: '2%',
 
 		fontWeight: 'bold',
 	},
@@ -26,95 +29,168 @@ const useStyles = (theme) => ({
 		texrDecoration: 'none',
 	},
 	nextButton: {
-		float: 'right',
+        float: 'right',
+        padding:'5px'
 	},
 	lastdiv: {
 		paddingBottom: '30px',
 	},
+	
+	resetText: {
+		marginLeft:'31%',
+		paddingBottom:'10px'
+		
+	},
+
+	CombinationNote : {
+		fontWeight:'lighter',
+		fontSize:'13px',
+		color:'blue'
+	},
+
+	errorTexts: {
+		fontSize:'12px',
+		color:'red'
+	}
 });
 
-const initialState = {
-	password: '',
-	passwordError: '',
+const initial = {
+	email:'',
+	validate: true,
+	count: 0,
+	showPassword: false,
 };
-class LoginPageNext extends Component {
-	constructor(props) {
-		super(props);
 
-		this.state = {
-			password: '',
-			passwordError: '',
-		};
-	}
+const passwordRegexpattern = '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
+class ForgotPassword extends Component {
+	state = {
+		email:'',
+		validate: true,
+		count: 0,
+		showPassword: false,	
+	};
+
+	handleChange = (prop) => (event) => {
+		this.setState({ [prop]: event.target.value });
+	};
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
 	};
 
-	myFunction = () => {
-		document.getElementById('myDropdown').classList.toggle('show');
+	handleClickShowPassword = () => {
+		this.setState({ showPassword: !this.state.showPassword });
+	};
+
+	handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
+
+	handleSnackbarClose = (event, reason) => {
+		console.log(event, reason);
+		this.setState({
+			snackbarStatus: false,
+		});
 	};
 
 	validate = () => {
-		let passwordError = '';
+		let emailError='';
 
-		if (!this.state.password) {
-			passwordError = '**Please Enter Valid Password**';
+		if (!this.state.email.includes("@")) {
+			emailError = '**Please Enter Valid email**';
 		}
 
-		if (passwordError) {
-			this.setState({ passwordError });
+		if (emailError) {
+			this.setState({ emailError});
 			return false;
 		}
 		return true;
 	};
 
-	handleSubmit = (event) => {
-    event.preventDefault();
-    const isValid = this.validate();
+	handleSubmit = async (event) => {
+		event.preventDefault();
+		const isValid = this.validate();
 		if (isValid) {
 			console.log(this.state);
-			this.setState(initialState);
+			this.setState(initial);
 		}
+
+		let emailData = {
+			email: this.state.email
+		}
+
+		console.log(emailData);
+		await this.resetWithEmailId(emailData);
 	};
+
+	redirectToLoginPg = () =>{
+		this.props.history.push('/')
+	}
+
+	resetWithEmailId(emailData){
+        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset', {
+        "email": emailData.email,
+	})
+	
+    .then((response) => {
+        console.log('response====>',response.data);
+        this.setState({
+            snackbarMessage: response.data.message,
+			snackbarStatus: true,
+		});
+    })
+    .catch( (error) => {
+		// handle error
+        console.log(error.response.data.error.message);
+        this.setState({
+            snackbarMessage: error.response.data.error.message,
+            snackbarStatus: true,
+        });
+	});	
+}
 
 	render() {
 		const { classes } = this.props;
 		return (
 			<div className="root">
 				<img className="logo" src={Logo} alt="GoogleImage" />
-				<p className="firstText">Sign in</p>
-				<br />
-				<p className="secondText">to continue to Gmail</p>
-				<br />
-
+				<p className={classes.resetText}>Reset Password</p>
+				<Snackbar
+					anchorOrigin={{
+						vertical: 'bottom',
+						horizontal: 'center',
+					}}
+					open={this.state.snackbarStatus}
+					onClose={this.handleSnackbarClose}
+					autoHideDuration={3000}
+					message={this.state.snackbarMessage}
+				/>
 				<TextField
-					label="Password"
-					type="password"
-					value={this.state.password}
+					label="Email or Phone"
+					type="text"
+					value={this.state.email}
 					className={classes.textField}
-					name="password"
+					name="email"
 					variant="outlined"
 					margin="normal"
 					onChange={this.updateState}
 				/>
-        <div style={{ fontSize: 12, color: 'red' }}>{this.state.passwordError}</div>
-
+				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
 				<div className={classes.lastdiv}>
-					<div className="dropdown">
-						<button onClick={this.myFunction} className="dropbtn">
-							<span className="dropdownbtn">Forgot Password?</span>
-						</button>
-					</div>
-
+					<Button
+					className={classes.backButton}
+						variant="contained"
+						color="primary"
+						onClick={this.redirectToLoginPg}>
+							Back
+					</Button>
 					<Button
 						className={classes.nextButton}
 						variant="contained"
 						color="primary"
-						href="/loginNext"
 						onClick={this.handleSubmit}
 					>
-						Next
+						Reset
 					</Button>
 				</div>
 			</div>
@@ -122,4 +198,4 @@ class LoginPageNext extends Component {
 	}
 }
 
-export default withStyles(useStyles)(LoginPageNext);
+export default withStyles(useStyles)(ForgotPassword);
