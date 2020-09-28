@@ -5,6 +5,7 @@ import '../scss/_login.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import Snackbar from '@material-ui/core/Snackbar';
 import Axios from 'axios';
 
 const useStyles = (theme) => ({
@@ -73,6 +74,14 @@ class LoginPage extends Component {
 		return true;
 	};
 
+	handleSnackbarClose = (event, reason) => {
+		console.log(event, reason);
+		this.setState({
+			snackbarStatus: false,
+		});
+	};
+
+
 	handleSubmit = async (event) => {
 		event.preventDefault();
 		const isValid = this.validate();
@@ -99,9 +108,17 @@ class LoginPage extends Component {
 		})
 			.then((response) => {
 				console.log(response.data.data);
+				this.setState({
+					snackbarMessage: "Login success!!",
+					snackbarStatus: true,	
+				});
 			})
 			.catch((error) => {
 				console.log(error.response);
+				this.setState({
+					snackbarMessage: "Login failed!!",
+					snackbarStatus: true,
+				});
 			});
 	}
 
@@ -109,6 +126,16 @@ class LoginPage extends Component {
 		const { classes } = this.props;
 		return (
 			<div className="root">
+				<Snackbar
+					anchorOrigin={{
+						vertical: 'bottom',
+						horizontal: 'center',
+					}}
+					open={this.state.snackbarStatus}
+					onClose={this.handleSnackbarClose}
+					autoHideDuration={2000}
+					message={this.state.snackbarMessage}
+				/>
 				<img className="logo" src={Logo} alt="GoogleImage" />
 				<p className="firstText">Sign in</p>
 				<br />
