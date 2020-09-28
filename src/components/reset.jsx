@@ -214,7 +214,7 @@ class ResetPassword extends Component {
 					}}
 					open={this.state.snackbarStatus}
 					onClose={this.handleSnackbarClose}
-					autoHideDuration={2000}
+					autoHideDuration={3000}
 					message={this.state.snackbarMessage}
 				/>
 				<TextField
