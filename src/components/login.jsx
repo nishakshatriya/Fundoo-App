@@ -171,7 +171,7 @@ class LoginPage extends Component {
 					margin="normal"
 					onChange={this.updateState}
 				/>
-				<Button onClick={this.redirectToForgotPasswordPg} className={classes.forgotMsg}>Forgot email?</Button>
+				<Button onClick={this.redirectToForgotPasswordPg} className={classes.forgotMsg}>Forgot email or password?</Button>
 				<br />
 				<p className={classes.browseLinkText}>
 					Not your computer? Use Guest mode to sign in privately.
@@ -198,7 +198,7 @@ class LoginPage extends Component {
 						href="/loginNext"
 						onClick={this.handleSubmit}
 					>
-						Next
+						Login
 					</Button>
 				</div>
 			</div>
