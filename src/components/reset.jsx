@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Logo from '../assets/google2.0.0.jpg';
 import '../scss/_login.scss';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -76,6 +77,7 @@ const initial = {
 const passwordRegexpattern = '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
 class ResetPassword extends Component {
 	state = {
+		email:'',
 		validate: true,
 		password:'',
         confirmPw:'',
@@ -105,9 +107,14 @@ class ResetPassword extends Component {
 	};
 
 	validate = () => {
+		let emailError='';
 		let passwordError = '';
 		let newpasswordError='';
 		let reenterpasswordError='';
+
+		if (!this.state.email.includes("@")) {
+			emailError = '**Please Enter Valid email**';
+		}
 		if (!this.state.password.includes(passwordRegexpattern)) {
 			passwordError = '**Please Enter Valid Password**';
 		}
@@ -122,6 +129,11 @@ class ResetPassword extends Component {
 
 		if (passwordError) {
 			this.setState({ passwordError});
+			return false;
+		}
+
+		if (emailError) {
+			this.setState({ emailError});
 			return false;
 		}
 
@@ -152,7 +164,18 @@ class ResetPassword extends Component {
 			<div className="root">
 				<img className="logo" src={Logo} alt="GoogleImage" />
 				<p className={classes.resetText}>Reset Password</p>
-				<Grid item xs={12}>
+				<TextField
+					label="Email or Phone"
+					type="text"
+					value={this.state.email}
+					className={classes.textField}
+					name="emailId"
+					variant="outlined"
+					margin="normal"
+					onChange={this.updateState}
+				/>
+				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
+				{/* <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-password">Current Password</InputLabel>
 						<OutlinedInput
@@ -230,7 +253,7 @@ class ResetPassword extends Component {
 					</FormControl>
 				</Grid>
 				<div className={classes.errorTexts}>{this.state.reenterpasswordError}</div>
-				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p>
+				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p> */}
 
 				<div className={classes.lastdiv}>
 					<Button
