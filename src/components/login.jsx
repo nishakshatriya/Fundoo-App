@@ -16,6 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import ApiCall from '../services/apiCalls'
 
 const useStyles = (theme) => ({
 	textField: {
@@ -111,7 +112,7 @@ class LoginPage extends Component {
 		this.props.history.push('/dashboard');
 	}
 
-	handleSubmit = async (event) => {
+	handleSubmit =  async (event) => {
 		event.preventDefault();
 		const isValid = this.validate();
 		if (isValid) {
@@ -127,6 +128,12 @@ class LoginPage extends Component {
 		console.log(userCredentials)
 
 		await this.loginWithCredentials(userCredentials);
+		//  ApiCall.loginWithCredentials(userCredentials, (response) => {
+		// 	this.setState({
+		// 		snackbarMessage: response.message,
+		// 		snackbarStatus: true
+		// 	})
+		// })
 	};
 
 	loginWithCredentials(userCredentials) {
