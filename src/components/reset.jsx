@@ -13,6 +13,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+import Axios from 'axios';
 
 const useStyles = (theme) => ({
 	textField: {
@@ -62,6 +63,7 @@ const useStyles = (theme) => ({
 });
 
 const initial = {
+	email:'',
 	validate: true,
 	password: '',
 	confirmPw: '',
@@ -156,7 +158,33 @@ class ResetPassword extends Component {
 			console.log(this.state);
 			this.setState(initial);
 		}
+
 	};
+
+	redirectToLoginPg = () =>{
+		this.props.history.push('/')
+	}
+
+	resetWithEmailId(email){
+        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset', {
+        "email": email,
+    })
+    .then((response) => {
+        console.log(response);
+        this.setState({
+            snackbarMessage: response.data.message,
+            snackbarStatus: true,
+        });
+    })
+    .catch( (error) => {
+        // handle error
+        console.log(error.response.data.error.message);
+        this.setState({
+            snackbarMessage: error.response.data.error.message,
+            snackbarStatus: true,
+        });
+    });
+}
 
 	render() {
 		const { classes } = this.props;
@@ -169,7 +197,7 @@ class ResetPassword extends Component {
 					type="text"
 					value={this.state.email}
 					className={classes.textField}
-					name="emailId"
+					name="email"
 					variant="outlined"
 					margin="normal"
 					onChange={this.updateState}
@@ -256,6 +284,13 @@ class ResetPassword extends Component {
 				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p> */}
 
 				<div className={classes.lastdiv}>
+					<Button
+					className={classes.backButton}
+						variant="contained"
+						color="primary"
+						onClick={this.redirectToLoginPg}>
+							Back
+					</Button>
 					<Button
 						className={classes.nextButton}
 						variant="contained"
