@@ -81,6 +81,13 @@ class LoginPage extends Component {
 		});
 	};
 
+	redirectToForgotPasswordPg = () =>{
+		this.props.history.push('/resetPage');
+	}
+
+	redirectToDashboardPg = () => {
+		this.props.history.push('/dashboard');
+	}
 
 	handleSubmit = async (event) => {
 		event.preventDefault();
@@ -112,6 +119,7 @@ class LoginPage extends Component {
 					snackbarMessage: "Login success!!",
 					snackbarStatus: true,	
 				});
+				this.redirectToDashboardPg();
 			})
 			.catch((error) => {
 				console.log(error.response);
@@ -163,7 +171,7 @@ class LoginPage extends Component {
 					margin="normal"
 					onChange={this.updateState}
 				/>
-				<p className={classes.forgotMsg}>Forgot email?</p>
+				<Button onClick={this.redirectToForgotPasswordPg} className={classes.forgotMsg}>Forgot email?</Button>
 				<br />
 				<p className={classes.browseLinkText}>
 					Not your computer? Use Guest mode to sign in privately.
