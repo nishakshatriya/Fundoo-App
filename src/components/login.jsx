@@ -7,6 +7,15 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
 import Axios from 'axios';
+import clsx from 'clsx';
+import IconButton from '@material-ui/core/IconButton';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
 const useStyles = (theme) => ({
 	textField: {
@@ -54,6 +63,10 @@ class LoginPage extends Component {
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	handleChange = (prop) => (event) => {
+		this.setState({ [prop]: event.target.value });
 	};
 
 	myFunction = () => {
@@ -161,16 +174,32 @@ class LoginPage extends Component {
 					onChange={this.updateState}
 				/>
 				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
-				<TextField
-					label="Password"
-					type="text"
-					value={this.state.password}
-					className={classes.textField}
-					name="password"
-					variant="outlined"
-					margin="normal"
-					onChange={this.updateState}
-				/>
+				 <Grid item xs={12}>
+					<FormControl className={clsx(classes.margin, classes.textField ,classes.PasswordText)} variant="outlined" size="small">
+						<InputLabel htmlFor="outlined-adornment-reenterpassword">Password</InputLabel>
+						<OutlinedInput
+							label="Password"
+							id="outlined-adornment-password password"
+							name="password"
+							type={this.state.showPassword ? 'text' : 'password'}
+							value={this.state.password}
+							onChange={this.updateState}
+							endAdornment={
+								<InputAdornment position="end">
+									<IconButton
+										aria-label="toggle password visibility"
+										onClick={this.handleClickShowPassword}
+										onMouseDown={this.handleMouseDownPassword}
+										edge="end"
+									>
+										{this.state.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+									</IconButton>
+								</InputAdornment>
+							}
+							labelWidth={70}
+						/>
+					</FormControl>
+				</Grid>
 				<Button onClick={this.redirectToForgotPasswordPg} className={classes.forgotMsg}>Forgot email or password?</Button>
 				<br />
 				<p className={classes.browseLinkText}>
