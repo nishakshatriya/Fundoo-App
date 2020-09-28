@@ -69,6 +69,14 @@ class LoginPage extends Component {
 		this.setState({ [prop]: event.target.value });
 	};
 
+	handleClickShowPassword = () => {
+		this.setState({ showPassword: !this.state.showPassword });
+	};
+
+	handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
+
 	myFunction = () => {
 		document.getElementById('myDropdown').classList.toggle('show');
 	};
