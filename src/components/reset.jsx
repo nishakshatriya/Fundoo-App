@@ -67,7 +67,6 @@ const useStyles = (theme) => ({
 const initial = {
 
 	validate: true,
-	password: '',
 	confirmPw: '',
 	newpassword:'',
 	reenterpassword:'',
@@ -78,7 +77,7 @@ const initial = {
 	reenterpasswordError:''
 };
 
-const passwordRegexpattern = '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
+const passwordRegexpattern = '[A-Za-z1-9#$^&*]'
 class ResetPassword extends Component {
 	state = {
 		
@@ -118,28 +117,14 @@ class ResetPassword extends Component {
 	};
 
 	validate = () => {
-		let passwordError = '';
 		let newpasswordError='';
-		let reenterpasswordError='';
 
-	
-
-		if (!this.state.newpassword.includes(passwordRegexpattern)) {
-			newpasswordError = '**Password doesnt Match**';
-		}
-
-		if (!this.state.reenterpassword.includes(passwordRegexpattern)) {
-			reenterpasswordError = '**Password doesnt Match**';
-		}
-
+		// if (!this.state.newpassword.includes(passwordRegexpattern)) {
+		// 	newpasswordError = '**Password doesnt Match**';
+		// }
 
 		if (newpasswordError) {
 			this.setState({ newpasswordError});
-			return false;
-		}
-
-		if (reenterpasswordError) {
-			this.setState({ reenterpasswordError});
 			return false;
 		}
 		return true;
@@ -153,7 +138,38 @@ class ResetPassword extends Component {
 			this.setState(initial);
 		}
 
+		let newPasswordWithToken = {
+			newPassword: this.state.newpassword
+		}
+
+		console.log(newPasswordWithToken)
+		await this.resetWithToken(newPasswordWithToken);
+
 	};
+
+
+	resetWithToken(newPasswordWithToken){
+		console.log(newPasswordWithToken)
+        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token='+this.props.match.params.token, {
+        "newPassword": newPasswordWithToken.newPassword,
+	})
+	
+    .then((response) => {
+		let messageSnackbar = response.status === 204 ? "Successfully resetted the password": "" ;
+        this.setState({
+            snackbarMessage: messageSnackbar,
+			snackbarStatus: true,
+		});
+    })
+    .catch( (error) => {
+		// handle error
+        console.log(error.response.data.error.message);
+        this.setState({
+            snackbarMessage: error.response.data.error.message,
+            snackbarStatus: true,
+        });
+	});	
+}
 
 	render() {
 		const { classes } = this.props;
@@ -171,7 +187,6 @@ class ResetPassword extends Component {
 					autoHideDuration={3000}
 					message={this.state.snackbarMessage}
 				/>
-				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
                 <Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-new-password">New Password</InputLabel>
@@ -198,32 +213,6 @@ class ResetPassword extends Component {
 					</FormControl>
 				</Grid>
 				<div className={classes.errorTexts}>{this.state.newpasswordError}</div>
-                <Grid item xs={12}>
-					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
-						<InputLabel htmlFor="outlined-adornment-reenterpassword">Re-enter Password</InputLabel>
-						<OutlinedInput
-							label="Re-enter Password"
-							id="outlined-adornment-password re-enter"
-							type={this.state.showPassword ? 'text' : 'password'}
-							value={this.state.reenterpassword}
-							onChange={this.handleChange('reenterpassword')}
-							endAdornment={
-								<InputAdornment position="end">
-									<IconButton
-										aria-label="toggle password visibility"
-										onClick={this.handleClickShowPassword}
-										onMouseDown={this.handleMouseDownPassword}
-										edge="end"
-									>
-										{this.state.showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-									</IconButton>
-								</InputAdornment>
-							}
-							labelWidth={70}
-						/>
-					</FormControl>
-				</Grid>
-				<div className={classes.errorTexts}>{this.state.reenterpasswordError}</div>
 				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p>
 
 				<div className={classes.lastdiv}>
