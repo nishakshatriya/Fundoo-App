@@ -6,7 +6,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Snackbar from '@material-ui/core/Snackbar';
-import Axios from 'axios';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -16,7 +15,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import ApiCall from '../services/apiCalls'
+import { loginWithCredentials } from '../services/UserServices';
+
 
 const useStyles = (theme) => ({
 	textField: {
@@ -127,37 +127,15 @@ class LoginPage extends Component {
 
 		console.log(userCredentials)
 
-		await this.loginWithCredentials(userCredentials);
-		//  ApiCall.loginWithCredentials(userCredentials, (response) => {
-		// 	this.setState({
-		// 		snackbarMessage: response.message,
-		// 		snackbarStatus: true
-		// 	})
-		// })
-	};
-
-	loginWithCredentials(userCredentials) {
-		console.log(userCredentials);
-		Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/login', {
-			"email": userCredentials.email,
-			"password": userCredentials.password,
-		})
-			.then((response) => {
-				console.log(response.data.data);
-				this.setState({
-					snackbarMessage: "Login success!!",
-					snackbarStatus: true,	
-				});
-				this.redirectToDashboardPg();
+		// await this.loginWithCredentials(userCredentials);
+		 loginWithCredentials(userCredentials, (message) => {
+			this.setState({
+				snackbarMessage: message,
+				snackbarStatus: true
 			})
-			.catch((error) => {
-				console.log(error.response);
-				this.setState({
-					snackbarMessage: "Login failed!!",
-					snackbarStatus: true,
-				});
-			});
-	}
+			this.redirectToDashboardPg();
+		})	
+	};
 
 	render() {
 		const { classes } = this.props;

@@ -15,11 +15,12 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import Axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
+import { resetWithToken } from '../services/UserServices';
 
 const useStyles = (theme) => ({
 	textField: {
-        width: '100%',
-        paddingBottom:'15px'
+		width: '100%',
+		paddingBottom: '15px',
 	},
 	forgotMsg: {
 		color: 'cornflowerblue',
@@ -38,59 +39,57 @@ const useStyles = (theme) => ({
 		texrDecoration: 'none',
 	},
 	nextButton: {
-        float: 'right',
-        padding:'5px'
+		float: 'right',
+		padding: '5px',
 	},
 	lastdiv: {
 		paddingBottom: '30px',
-		paddingTop:'30px'
-	},
-	
-	resetText: {
-		marginLeft:'31%',
-		paddingBottom:'10px'
-		
+		paddingTop: '30px',
 	},
 
-	CombinationNote : {
-		fontWeight:'lighter',
-		fontSize:'13px',
-		color:'blue'
+	resetText: {
+		marginLeft: '31%',
+		paddingBottom: '10px',
+	},
+
+	CombinationNote: {
+		fontWeight: 'lighter',
+		fontSize: '13px',
+		color: 'blue',
 	},
 
 	errorTexts: {
-		fontSize:'12px',
-		color:'red'
-	}
+		fontSize: '12px',
+		color: 'red',
+	},
 });
 
 const initial = {
-
 	validate: true,
 	confirmPw: '',
-	newpassword:'',
-	reenterpassword:'',
+	newpassword: '',
+	reenterpassword: '',
 	count: 0,
 	showPassword: false,
-	passwordError:'',
-	newpasswordError:'',
-	reenterpasswordError:''
+	passwordError: '',
+	newpasswordError: '',
+	reenterpasswordError: '',
 };
 
-const passwordRegexpattern = '^(?=.*[A-Z])(?=.*[0-9])(?=.*[A-Za-z0-9@#!$%^&*()_]{8,})[A-Za-z0-9]+?[@#!$%^&*()_][A-Za-z0-9]{1,}?$'
+const passwordRegexpattern =
+	'^(?=.*[A-Z])(?=.*[0-9])(?=.*[A-Za-z0-9@#!$%^&*()_]{8,})[A-Za-z0-9]+?[@#!$%^&*()_][A-Za-z0-9]{1,}?$';
 class ResetPassword extends Component {
 	state = {
-		
 		validate: true,
-		password:'',
-        confirmPw:'',
-        newpassword:'',
-        reenterpassword:'',
+		password: '',
+		confirmPw: '',
+		newpassword: '',
+		reenterpassword: '',
 		count: 0,
 		showPassword: false,
-		passwordError:'',
-		newpasswordError:'',
-		reenterpasswordError:''
+		passwordError: '',
+		newpasswordError: '',
+		reenterpasswordError: '',
 	};
 
 	handleChange = (prop) => (event) => {
@@ -117,14 +116,14 @@ class ResetPassword extends Component {
 	};
 
 	validate = () => {
-		let newpasswordError='';
+		let newpasswordError = '';
 
 		if (!this.state.newpassword.match(passwordRegexpattern)) {
 			newpasswordError = '**Password doesnt Match**';
 		}
 
 		if (newpasswordError) {
-			this.setState({ newpasswordError});
+			this.setState({ newpasswordError });
 			return false;
 		}
 		return true;
@@ -139,37 +138,17 @@ class ResetPassword extends Component {
 		}
 
 		let newPasswordWithToken = {
-			newPassword: this.state.newpassword
-		}
+			newPassword: this.state.newpassword,
+		};
 
-		console.log(newPasswordWithToken)
-		await this.resetWithToken(newPasswordWithToken);
-
-	};
-
-
-	resetWithToken(newPasswordWithToken){
-		console.log(newPasswordWithToken)
-        Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token='+this.props.match.params.token, {
-        "newPassword": newPasswordWithToken.newPassword,
-	})
-	
-    .then((response) => {
-		let messageSnackbar = response.status === 204 ? "Successfully resetted the password": "" ;
-        this.setState({
-            snackbarMessage: messageSnackbar,
-			snackbarStatus: true,
+		console.log(newPasswordWithToken);
+		await resetWithToken(newPasswordWithToken, this.props.match.params.token, (message) => {
+			this.setState({
+				snackbarMessage: message,
+				snackbarStatus: true,
+			});
 		});
-    })
-    .catch( (error) => {
-		// handle error
-        console.log(error.response.data.error.message);
-        this.setState({
-            snackbarMessage: error.response.data.error.message,
-            snackbarStatus: true,
-        });
-	});	
-}
+	};
 
 	render() {
 		const { classes } = this.props;
@@ -187,7 +166,7 @@ class ResetPassword extends Component {
 					autoHideDuration={3000}
 					message={this.state.snackbarMessage}
 				/>
-                <Grid item xs={12}>
+				<Grid item xs={12}>
 					<FormControl className={clsx(classes.margin, classes.textField)} variant="outlined" size="small">
 						<InputLabel htmlFor="outlined-adornment-new-password">New Password</InputLabel>
 						<OutlinedInput
@@ -213,15 +192,18 @@ class ResetPassword extends Component {
 					</FormControl>
 				</Grid>
 				<div className={classes.errorTexts}>{this.state.newpasswordError}</div>
-				<p className={classes.CombinationNote}>*Use atleast one special character, one number, one character and six digit long*</p>
+				<p className={classes.CombinationNote}>
+					*Use atleast one special character, one number, one character and six digit long*
+				</p>
 
 				<div className={classes.lastdiv}>
 					<Button
-					className={classes.backButton}
+						className={classes.backButton}
 						variant="contained"
 						color="primary"
-						onClick={this.redirectToLoginPg}>
-							Back
+						onClick={this.redirectToLoginPg}
+					>
+						Back
 					</Button>
 					<Button
 						className={classes.nextButton}

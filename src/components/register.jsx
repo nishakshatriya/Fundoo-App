@@ -18,6 +18,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
 import Axios from 'axios';
+import { createUserAccount } from '../services/UserServices';
 
 const styles = (theme) => ({
 	root: {
@@ -168,7 +169,12 @@ class user extends Component {
 		};
 
 		console.log('asdfg', userData);
-		await this.createUserAccount(userData);
+		await createUserAccount(userData , (message) => {
+			this.setState({
+				snackbarMessage: message,
+				snackbarStatus: true,
+			})
+		});
 
 		// (await this.validateInfo()) ? this.createUserAccount(userData.firstName) : this.createUserAccount();
 	};
@@ -184,32 +190,6 @@ class user extends Component {
 		this.props.history.push('/')
 	}
 	
-	createUserAccount(userData) {
-		console.log(userData);
-		Axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp', {
-			email: userData.emailId,
-			firstName: userData.firstName,
-			lastName: userData.lastName,
-			password: userData.password,
-			service: 'advance',
-		})
-			.then((response) => {
-				console.log(response.data.data);
-				this.setState({
-					snackbarMessage: response.data.data.message,
-					snackbarStatus: true,	
-				});
-				this.redirectToLoginPg();
-			})
-			.catch((error) => {
-				console.log(error.response);
-				this.setState({
-					snackbarMessage: error.response.data.error.message,
-					snackbarStatus: true,
-				});
-			});
-	}
-
 	render() {
 		const { classes } = this.props;
 		return (
