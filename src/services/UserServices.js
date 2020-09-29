@@ -37,7 +37,7 @@ export const  loginWithCredentials = async (user,callback) => {
         callback("Login Successful");
       })
       .catch((error) => {
-        callback(error.response.data.error.message);
+        callback("login Failed");
       });
   }
 
@@ -49,7 +49,7 @@ export const  loginWithCredentials = async (user,callback) => {
     )
       .then((response) => {
         let messageSnackbar =
-          response.status === 204 ? "Successfully resetted the password" : "";
+          response.status === 204 ? "Password successfully reset!" : "Cannot Reset!";
         callback(messageSnackbar);
       })
       .catch((error) => {

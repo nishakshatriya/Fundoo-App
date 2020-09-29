@@ -126,14 +126,16 @@ class LoginPage extends Component {
 		}
 
 		console.log(userCredentials)
-
+		
 		// await this.loginWithCredentials(userCredentials);
 		 loginWithCredentials(userCredentials, (message) => {
 			this.setState({
 				snackbarMessage: message,
 				snackbarStatus: true
 			})
-			this.redirectToDashboardPg();
+			if(message === 'Login Successful')	{
+				this.redirectToDashboardPg();
+			}	
 		})	
 	};
 
