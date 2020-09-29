@@ -6,7 +6,7 @@
 }
 
 .app-bar{
-    box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),0 1px 10px 0 rgba(0,0,0,0.12),0 2px 4px -1px rgba(0,0,0,0.2) !important;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2) !important;
 }
 
 .header-title{
@@ -18,3 +18,79 @@
     width: 40px;
     padding-right: 8px;
 }
+
+.header-title{
+    font-weight: 500;
+    padding: 0.25em;
+    font-size: 21px !important;
+}
+
+.header-search{
+    position: relative;
+    border: 1px solid $light-gray;
+    border-radius: 0.5em;
+    background-color: $sandy;
+    height: 3em;
+    opacity: 0.30;
+    color: $black;
+    margin-right: 0.25em;
+    margin-left: 0em;
+    width: 55%;
+    margin: 0em 4em;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.2) !important ;
+}
+
+.header-input-input{
+    padding: 0.2em;
+    padding-left: 1em;
+    width: 100%;
+    height: 100%;
+    color: $black !important;
+    font-size: 1em !important;
+}
+
+.header-input-input{
+  input{
+    font-size: 1em;
+    padding: 0em 2em;
+    color: $black;
+}
+}
+
+.header-icon{
+    padding: 10px;
+    height: 100%;
+    cursor: pointer;
+    display: flex;
+    color:$black;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-icon.search{
+    position: absolute;
+}
+
+.header-icon.clear{
+    position: absolute;
+    right: 0%;
+}
+
+.top-menu{
+    display: flex;
+    padding: 0em 5em;
+}
+
+.keep-icon{
+    width: 40px;
+}
+
+.header-logo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0em 0.25em;
+}
+
