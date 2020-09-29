@@ -45,7 +45,9 @@ export const  loginWithCredentials = async (user,callback) => {
    return Axios.post(
       "http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token=" +
         token,
-      user
+      user,{header:{
+        'content-type':'application/json'
+      }}
     )
       .then((response) => {
         let messageSnackbar =

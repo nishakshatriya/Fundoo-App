@@ -164,9 +164,8 @@ class user extends Component {
 		let userData = {
 			firstName: this.state.firstName,
 			lastName: this.state.lastName,
-			emailId: this.state.emailId,
+			email: this.state.emailId,
 			password: this.state.password,
-			confirmPw: this.state.confirmPw,
 			service:'advance'
 		};
 
