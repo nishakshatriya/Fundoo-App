@@ -1,9 +1,10 @@
 import Axios from "axios";
 
+const baseUrl = 'http://fundoonotes.incubation.bridgelabz.com/api/'
 
 export const  resetWithEmailId = (user, callback)=>{
   return  Axios.post(
-      "http://fundoonotes.incubation.bridgelabz.com/api/user/reset",
+      `${baseUrl}/user/reset`,
       user
     )
       .then((response) => {
@@ -16,7 +17,7 @@ export const  resetWithEmailId = (user, callback)=>{
 
  export const createUserAccount =  (user,callback) => {
    return Axios.post(
-      "http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp",
+      `${baseUrl}user/userSignUp`,
       user
     )
       .then((response) => {
@@ -30,7 +31,7 @@ export const  resetWithEmailId = (user, callback)=>{
 
 export const  loginWithCredentials = async (user,callback) => {
   return await Axios.post(
-      "http://fundoonotes.incubation.bridgelabz.com/api/user/login",
+      `${baseUrl}user/login`,
       user
     )
       .then((response) => {
@@ -43,7 +44,7 @@ export const  loginWithCredentials = async (user,callback) => {
 
  export const resetWithToken = (user, token, callback) => {
    return Axios.post(
-      "http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password?access_token=" +
+      `${baseUrl}/user/reset-password?access_token=` +
         token,
       user,{header:{
         'content-type':'application/json'

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../scss/_dashboard.scss';
-import { Grid, Snackbar, AppBar, IconButton, Toolbar, Typography, InputBase } from '@material-ui/core';
+import { Grid, AppBar, IconButton, Toolbar, Typography, InputBase } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
@@ -28,7 +28,7 @@ class Dashboard extends Component {
 								<SearchIcon />
 							</div>
 							<InputBase
-                                placeholder="Search"
+								placeholder="Search"
 								className="header-input-root header-input-input"
 								inputProps={{ 'aria-label': 'search' }}
 							/>
