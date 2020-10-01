@@ -17,7 +17,6 @@ import withStyles from '@material-ui/styles/withStyles';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
-import Axios from 'axios';
 import { createUserAccount } from '../services/UserServices';
 
 const styles = (theme) => ({
@@ -284,7 +283,7 @@ class user extends Component {
 									</FormControl>
 								</Grid>
 								<p className={classes.combinationText}>You can use letters, numbers and periods</p>
-								<a className={classes.currentAccount} href="#">
+								<a className={classes.currentAccount} href="register">
 									{' '}
 									Use my current email address instead
 								</a>

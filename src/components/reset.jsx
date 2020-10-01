@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Logo from '../assets/google2.0.0.jpg';
 import '../scss/_login.scss';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import clsx from 'clsx';
 import IconButton from '@material-ui/core/IconButton';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -13,7 +12,6 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import Axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import { resetWithToken } from '../services/UserServices';
 

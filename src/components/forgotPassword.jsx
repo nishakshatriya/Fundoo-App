@@ -4,7 +4,6 @@ import Logo from '../assets/google2.0.0.jpg';
 import '../scss/_login.scss';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Axios from 'axios';
 import Snackbar from '@material-ui/core/Snackbar';
 import { resetWithEmailId } from '../services/UserServices';
 
@@ -62,7 +61,6 @@ const initial = {
 	showPassword: false,
 };
 
-const passwordRegexpattern = '^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$'
 class ForgotPassword extends Component {
 	state = {
 		email:'',
