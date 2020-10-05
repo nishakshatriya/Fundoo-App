@@ -93,12 +93,12 @@ export default function PersistentDrawerLeft() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
+      {/* <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
-      >
+      > */}
         <Toolbar>
           <IconButton
             color="inherit"
@@ -113,7 +113,7 @@ export default function PersistentDrawerLeft() {
             Persistent drawer
           </Typography>
         </Toolbar>
-      </AppBar>
+      {/* </AppBar> */}
       <Drawer
         className={classes.drawer}
         variant="persistent"

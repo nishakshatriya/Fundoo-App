@@ -9,6 +9,7 @@ import SettingsOutlinedIcon from '@material-ui/icons/SettingsOutlined';
 import keepIcon from '../assets/googleKeep.png';
 import userProfie from '../assets/userProfile.jpg';
 import AppsOutlinedIcon from '@material-ui/icons/AppsOutlined';
+import Drawer from '../components/drawer';
 
 class Dashboard extends Component {
 	render() {
@@ -52,6 +53,7 @@ class Dashboard extends Component {
 						</div>
 					</Toolbar>
 				</AppBar>
+				<Drawer />
 			</Grid>
 		);
 	}

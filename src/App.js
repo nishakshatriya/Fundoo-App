@@ -12,7 +12,7 @@ function App() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<StaticRouter>
+				<BrowserRouter>
 					<Switch>
 					<Route path={'/drawer'} exact component={Drawer}></Route>
 						<Route path={'/dashboard'} exact component={Dashboard}></Route>
@@ -21,7 +21,7 @@ function App() {
 						<Route path={'/forgotPassword'} exact component={LoginPageNext}></Route>
 						<Route path={'/'} exact component={LoginPage}></Route>
 					</Switch>
-				</StaticRouter>
+				</BrowserRouter>
 			</header>
 		</div>
 	);
