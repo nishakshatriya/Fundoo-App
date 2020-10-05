@@ -12,10 +12,11 @@ import AppsOutlinedIcon from '@material-ui/icons/AppsOutlined';
 import Drawer from '../components/drawer';
 
 class Dashboard extends Component {
+	
 	render() {
 		return (
 			<Grid item md={12} container>
-				<AppBar className="app-bar">
+				<AppBar className="app-bar" >
 					<Toolbar className="header">
 						<IconButton edge="start">
 							<MenuIcon className="menu-icon" />

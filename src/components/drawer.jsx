@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -15,8 +14,12 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
+import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
+import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 
 const drawerWidth = 240;
 
@@ -109,9 +112,6 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
         </Toolbar>
       {/* </AppBar> */}
       <Drawer
@@ -132,7 +132,7 @@ export default function PersistentDrawerLeft() {
         <List>
           {['Notes', 'Remainders', 'nisha', 'Edit labels', 'Archive','Trash'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index === 0 ? (<EmojiObjectsOutlinedIcon />): index === 1 ? (<NotificationsNoneIcon/>): index === 2 ? (<LabelOutlinedIcon/>) : index === 3 ? (<EditOutlinedIcon/>): index === 4 ? (<ArchiveOutlinedIcon/>) : <DeleteOutlineOutlinedIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
