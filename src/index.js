@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 require('dotenv').config()
 
-ReactDOM.hydrate(
+ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,

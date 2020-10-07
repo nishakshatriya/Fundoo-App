@@ -100,6 +100,34 @@
 
 .user-icon{
     border-radius: 50%;
+    width: 1px;
+    height: 2px;
+}
+
+.user-photo{
+    border-radius: 50%;
     width: 40px;
     height: 40px;
+}
+
+.user-details {
+    margin-left: 10%;
+}
+
+.drawer{
+    width: 240px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding-top: 4em;
+}
+
+.drawer-open{
+    width: 240px;
+    transition: width ease-out 0.3s;
+}
+
+.drawer-close{
+    transition: width ease-out 0.3s;
+    overflow: hidden;
+    width: 40px;
 }

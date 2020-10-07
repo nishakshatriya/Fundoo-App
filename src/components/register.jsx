@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
-import '../scss/_register.scss';
+import '../css/register.scss';
 import googleLogo from '../assets/google2.0.0.jpg';
 import Account from '../assets/account.png';
 import Grid from '@material-ui/core/Grid';
@@ -207,7 +207,7 @@ class user extends Component {
 				<div classes={classes.firstblock}>
 					<div classes={classes.inputBox}>
 						<img className={classes.logo} src={googleLogo} alt="google-icon"></img>
-						<p className="registerpgfirstText">Create your Google Account</p>
+						<p id="abc" className="registerpgfirstText">Create your Google Account</p>
 						<form>
 							<Grid container spacing={1} direction="row" justify="space-evenly" alignItems="center">
 								<Grid item xs={12} sm={6}>
