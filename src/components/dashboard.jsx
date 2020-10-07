@@ -49,6 +49,7 @@ class Dashboard extends React.Component {
           drawerOpen={this.state.drawerOpen}
         />
         <MiniDrawer
+          menuOpen={this.handleDrawerOpen}
           menuClose={this.handleDrawerClose}
           drawerOpen={this.state.drawerOpen}
         />

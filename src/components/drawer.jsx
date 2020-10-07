@@ -103,7 +103,7 @@ export default function MiniDrawer(props) {
           [classes.drawerClose]: !props.drawerOpen,
         }),
       }}
-      onMouseOver={props.drawerOpen} onMouseOut={props.drawerClose}
+      onMouseOver={(props.menuOpen)} onMouseOut={props.menuClose}
     >
       <div className={classes.toolbar}>
         <IconButton onClick={props.menuClose}>
