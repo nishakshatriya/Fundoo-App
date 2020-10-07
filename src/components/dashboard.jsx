@@ -2,7 +2,7 @@
 import React from "react";
 import { Snackbar, Typography } from "@material-ui/core";
 import AppBar from "../components/appBar";
-import MiniDrawer from "../components/drawerr";
+import MiniDrawer from "./drawer";
 // import Notes from "../components/notes";
 
 class Dashboard extends React.Component {
