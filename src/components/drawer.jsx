@@ -15,6 +15,7 @@ import EmojiObjectsOutlinedIcon from '@material-ui/icons/EmojiObjectsOutlined';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
+import '../css/_drawer.scss';
 
 const drawerWidth = 280;
 
@@ -79,8 +80,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  paper: {
-    topMargin:theme.spacing(10)
+  MuiDrawer: {
+    topMargin:'65px'
   }
 }));
 
