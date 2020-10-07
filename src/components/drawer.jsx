@@ -114,11 +114,11 @@ export default function MiniDrawer(props) {
           )}
         </IconButton>
       </div>
-      <List>
+      <List className="list-icons">
       {['Notes', 'Remainders', 'nisha', 'Edit labels', 'Archive','Trash'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index === 0 ? (<EmojiObjectsOutlinedIcon />): index === 1 ? (<NotificationsNoneIcon/>): index === 2 ? (<LabelOutlinedIcon/>) : index === 3 ? (<EditOutlinedIcon/>): index === 4 ? (<ArchiveOutlinedIcon/>) : <DeleteOutlineOutlinedIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+            <ListItem button key={text}> 
+              <ListItemIcon >{index === 0 ? <div><EmojiObjectsOutlinedIcon /></div>: index === 1 ? <div><NotificationsNoneIcon/></div>: index === 2 ?<div><LabelOutlinedIcon/></div> : index === 3 ? <div><EditOutlinedIcon/></div>: index === 4 ? <div><ArchiveOutlinedIcon/></div>:<div><DeleteOutlineOutlinedIcon/></div> }</ListItemIcon>
+              <ListItemText className="textss" primary={text}/>  
             </ListItem>
           ))}
       </List>
