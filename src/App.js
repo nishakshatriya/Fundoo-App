@@ -5,9 +5,6 @@ import LoginPage from './components/login.jsx';
 import LoginPageNext from './components/forgotPassword';
 import Dashboard from './components/dashboard';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
-// import Drawer from './components/drawer';
-// import Notes from './components/notes';
-
 
 function App() {
 	return (
