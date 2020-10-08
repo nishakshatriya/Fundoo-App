@@ -76,13 +76,26 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
+  // content: {
+  //   flexGrow: 1,
+  //   padding: theme.spacing(3),
+  // },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginRight: -drawerWidth,
   },
-  MuiDrawer: {
-    topMargin:'65px'
-  }
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: 0,
+  },
 }));
 
 export default function MiniDrawer(props) {
@@ -103,6 +116,7 @@ export default function MiniDrawer(props) {
           [classes.drawerClose]: !props.drawerOpen,
         }),
       }}
+
       onMouseOver={(props.menuOpen)} onMouseOut={props.menuClose}
     >
       <div className={classes.toolbar}>
