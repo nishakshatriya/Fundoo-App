@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography, Card, Button, TextField, TextareaAutosize } from '@material-ui/core';
 import '../css/_notes.scss';
+import DynamicNotes from '../components/dynamicNotes.jsx';
 import { withStyles } from '@material-ui/core/styles';
 import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
@@ -59,7 +60,8 @@ class Notes extends React.Component {
 							<Button className="close-button">Close</Button>
 						</div>
 					</Card>
-					<Grid container spacing={2} className="note-row">
+					<DynamicNotes/>
+					{/* <Grid container spacing={2} className="note-row">
 						<Grid item md={3}>
 							<Card elevation={3} variant="outlined" className="note-card">
 								<Typography className="note-content">
@@ -88,7 +90,7 @@ class Notes extends React.Component {
 								</Typography>
 							</Card>
 						</Grid>
-					</Grid>
+					</Grid> */}
 				</Grid>
 			</Grid>
 		);
