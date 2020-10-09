@@ -10,6 +10,9 @@ import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import UndoOutlinedIcon from '@material-ui/icons/UndoOutlined';
 import RedoOutlinedIcon from '@material-ui/icons/RedoOutlined';
+import NoteServices from '../services/NoteServices';
+// import { response } from 'express';
+// import { ArtTrack } from '@material-ui/icons';
 
 const useStyles = (theme) => ({
 	Maincard: {
@@ -23,9 +26,12 @@ const useStyles = (theme) => ({
 
 class Notes extends React.Component {
 	state = {
-		Notetitle: '',
-		Notedescription: '',
+		title: '',
+		description: '',
 	};
+
+
+	// const [note, setNote] = useState({ title: "", description: "" });
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
@@ -40,10 +46,22 @@ class Notes extends React.Component {
 		event.preventDefault();
 
 		 let noteData = {
-			title:this.Notetitle,
-			description:this.Notedescription
+			title:this.state.title,
+			description:this.state.description
 		}
 		 console.log("Noteeee Objectttt",noteData)
+		 NoteServices.createNew(noteData).then((response) => {
+            if(response.status === 200){
+				alert("successfully added")
+            }
+            else{
+                alert("Empty Note Cannot be added");
+            }
+        }
+
+        ).catch((error) => {
+            alert("Empty Note Cannot be added");
+        });
 	};
 
 	render() {
