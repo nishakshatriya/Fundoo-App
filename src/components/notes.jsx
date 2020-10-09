@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Card, Button, TextField, TextareaAutosize } from '@material-ui/core';
+import { Grid,Card, Button} from '@material-ui/core';
 import '../css/_notes.scss';
 import DynamicNotes from '../components/dynamicNotes.jsx';
 import { withStyles } from '@material-ui/core/styles';
@@ -88,36 +88,6 @@ class Notes extends React.Component {
 						</div>
 					</Card>
 					<DynamicNotes />
-					{/* <Grid container spacing={2} className="note-row">
-						<Grid item md={3}>
-							<Card elevation={3} variant="outlined" className="note-card">
-								<Typography className="note-content">
-									Hello Hi asdfghjklsdfghjkkjhgfsdfghjklkjhgew45678ohgv
-								</Typography>
-							</Card>
-						</Grid>
-						<Grid item md={3}>
-							<Card elevation={3} variant="outlined" className="note-card">
-								<Typography className="note-content">
-									Good Morning asdfghjkkjtredfghjk,mnbvcbnm,
-								</Typography>
-							</Card>
-						</Grid>
-						<Grid item md={3}>
-							<Card elevation={3} variant="outlined" className="note-card">
-								<Typography className="note-content">
-									Good Evening wertyuiop;lkjhgfdsazxcvbnm,.
-								</Typography>
-							</Card>
-						</Grid>
-						<Grid item md={3}>
-							<Card elevation={3} variant="outlined" className="note-card">
-								<Typography className="note-content">
-									Good Night asdfbnmmnbvcxswertyuiol,mnbvcxzsrtyuj
-								</Typography>
-							</Card>
-						</Grid>
-					</Grid> */}
 				</Grid>
 			</Grid>
 		);

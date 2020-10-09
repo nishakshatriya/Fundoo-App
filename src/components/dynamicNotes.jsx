@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Card, Button, TextField, TextareaAutosize } from '@material-ui/core';
+import { Grid, Typography, Card} from '@material-ui/core';
 import '../css/_notes.scss';
 import { withStyles } from '@material-ui/core/styles';
 
