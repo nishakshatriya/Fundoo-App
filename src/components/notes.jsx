@@ -26,6 +26,15 @@ class Notes extends React.Component {
 		title: '',
 		description: '',
 	};
+
+	updateState = (event) => {
+		this.setState({ [event.target.name]: event.target.value });
+	};
+
+	handleChange = (prop) => (event) => {
+		this.setState({ [prop]: event.target.value });
+	};
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -38,6 +47,7 @@ class Notes extends React.Component {
 								placeholder="Title"
 								name="title"
 								value={this.state.title}
+								onChange={this.updateState}
 								required
 							/>
 						</div>
@@ -47,6 +57,7 @@ class Notes extends React.Component {
 							placeholder="Take a notes..."
 							name="description"
 							value={this.state.description}
+							onChange={this.updateState}
 							required
 						></textarea>
 						<div className="Icons-Buttons">
