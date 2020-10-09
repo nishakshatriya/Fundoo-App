@@ -23,16 +23,27 @@ const useStyles = (theme) => ({
 
 class Notes extends React.Component {
 	state = {
-		title: '',
-		description: '',
+		Notetitle: '',
+		Notedescription: '',
 	};
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
+		console.log(this.state);
 	};
 
 	handleChange = (prop) => (event) => {
 		this.setState({ [prop]: event.target.value });
+	};
+
+	handleSubmit =  (event) => {
+		event.preventDefault();
+
+		 let noteData = {
+			title:this.Notetitle,
+			description:this.Notedescription
+		}
+		 console.log("Noteeee Objectttt",noteData)
 	};
 
 	render() {
@@ -84,7 +95,9 @@ class Notes extends React.Component {
 									<RedoOutlinedIcon />
 								</div>
 							</div>
-							<Button className="close-button">Close</Button>
+							<Button className="close-button" 
+							type="submit"
+							onClick={this.handleSubmit}>Close</Button>
 						</div>
 					</Card>
 					<DynamicNotes />

@@ -17,7 +17,6 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import { loginWithCredentials } from '../services/UserServices';
 
-
 const useStyles = (theme) => ({
 	textField: {
 		width: '100%',
@@ -49,18 +48,15 @@ const useStyles = (theme) => ({
 const initial = {
 	emailId: '',
 	emailError: '',
-	password:''
+	password: '',
 };
 
 class LoginPage extends Component {
-	
-
-		state = {
-			emailId: '',
-			emailError: '',
-			password:''
-		};
-	
+	state = {
+		emailId: '',
+		emailError: '',
+		password: '',
+	};
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });
@@ -81,7 +77,6 @@ class LoginPage extends Component {
 	handleMouseDownPassword = (event) => {
 		event.preventDefault();
 	};
-
 
 	validate = () => {
 		let emailError = '';
@@ -104,15 +99,15 @@ class LoginPage extends Component {
 		});
 	};
 
-	redirectToForgotPasswordPg = () =>{
+	redirectToForgotPasswordPg = () => {
 		this.props.history.push('/forgotPassword');
-	}
+	};
 
 	redirectToDashboardPg = () => {
 		this.props.history.push('/dashboard');
-	}
+	};
 
-	handleSubmit =  async (event) => {
+	handleSubmit = async (event) => {
 		event.preventDefault();
 		const isValid = this.validate();
 		if (isValid) {
@@ -120,23 +115,46 @@ class LoginPage extends Component {
 			this.setState(initial);
 		}
 
-	 let userCredentials = {
-			email:this.state.emailId,
-			password:this.state.password
-		}
+		let userCredentials = {
+			email: this.state.emailId,
+			password: this.state.password,
+		};
 
-		console.log(userCredentials)
-		
+		console.log(userCredentials);
+
+		// localStorage.setItem('firstName', userCredentials.data.firstName);
+		// localStorage.setItem('lastName', userCredentials.data.lastName);
+		// localStorage.setItem('token', userCredentials.data.id);
+		// localStorage.setItem('email', userCredentials.data.email);
+
 		// await this.loginWithCredentials(userCredentials);
-		 loginWithCredentials(userCredentials, (message) => {
-			this.setState({
-				snackbarMessage: message,
-				snackbarStatus: true
-			})
-			if(message === 'Login Successful')	{
+
+		// loginWithCredentials(userCredentials, (message) => {
+		// 	this.setState({
+		// 		snackbarMessage: message,
+		// 		snackbarStatus: true,
+		// 	});
+		// 	console.log(userCredentials);
+		// 	if (message === 'Login Successful') {
+		// 		this.redirectToDashboardPg();
+		// 	}
+		// });
+
+			loginWithCredentials(userCredentials, (response) => {
+			let message;
+			if(response.data === undefined){
+				message = response.response.data.error.message;
+				this.setState({
+					snackbarMessage: message,
+					snackbarStatus: true,
+				});
+			}else{
+				localStorage.setItem('token',response.data.id);
 				this.redirectToDashboardPg();
-			}	
-		})	
+			}
+			let token = localStorage.getItem('token');
+			console.log('token======>', token);
+		});
 	};
 
 	render() {
@@ -170,8 +188,12 @@ class LoginPage extends Component {
 					onChange={this.updateState}
 				/>
 				<div style={{ fontSize: 12, color: 'red' }}>{this.state.emailError}</div>
-				 <Grid item xs={12}>
-					<FormControl className={clsx(classes.margin, classes.textField ,classes.PasswordText)} variant="outlined" size="small">
+				<Grid item xs={12}>
+					<FormControl
+						className={clsx(classes.margin, classes.textField, classes.PasswordText)}
+						variant="outlined"
+						size="small"
+					>
 						<InputLabel htmlFor="outlined-adornment-reenterpassword">Password</InputLabel>
 						<OutlinedInput
 							label="Password"
@@ -196,7 +218,9 @@ class LoginPage extends Component {
 						/>
 					</FormControl>
 				</Grid>
-				<Button onClick={this.redirectToForgotPasswordPg} className={classes.forgotMsg}>Forgot email or password?</Button>
+				<Button onClick={this.redirectToForgotPasswordPg} className={classes.forgotMsg}>
+					Forgot email or password?
+				</Button>
 				<br />
 				<p className={classes.browseLinkText}>
 					Not your computer? Use Guest mode to sign in privately.

@@ -36,10 +36,10 @@ export const  loginWithCredentials = async (user,callback) => {
       user
     )
       .then((response) => {
-        callback("Login Successful");
+        callback(response);
       })
       .catch((error) => {
-        callback("login Failed");
+        callback(error);
       });
   }
 
