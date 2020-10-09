@@ -22,6 +22,10 @@ const useStyles = (theme) => ({
 });
 
 class Notes extends React.Component {
+	state = {
+		title: '',
+		description: '',
+	};
 	render() {
 		const { classes } = this.props;
 		return (
@@ -29,10 +33,22 @@ class Notes extends React.Component {
 				<Grid item md={this.props.isDrawerOpen ? 12 : 10}>
 					<Card variant="outlined" className={classes.Maincard}>
 						<div>
-							<input className="main-card-title" placeholder="Title"/>
+							<input
+								className="main-card-title"
+								placeholder="Title"
+								name="title"
+								value={this.state.title}
+								required
+							/>
 						</div>
-						<textarea aria-label="empty textarea" className="main-card-notes" placeholder="Take a notes...">
-						</textarea>
+						<textarea
+							aria-label="empty textarea"
+							className="main-card-notes"
+							placeholder="Take a notes..."
+							name="description"
+							value={this.state.description}
+							required
+						></textarea>
 						<div className="Icons-Buttons">
 							<div className="icons">
 								<div className="icon">
@@ -60,7 +76,7 @@ class Notes extends React.Component {
 							<Button className="close-button">Close</Button>
 						</div>
 					</Card>
-					<DynamicNotes/>
+					<DynamicNotes />
 					{/* <Grid container spacing={2} className="note-row">
 						<Grid item md={3}>
 							<Card elevation={3} variant="outlined" className="note-card">
