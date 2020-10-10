@@ -57,7 +57,8 @@ class Notes extends React.Component {
             else{
                 alert("Empty Note Cannot be added");
             }
-        }
+		},
+		window.location.reload()
 
         ).catch((error) => {
             alert("Empty Note Cannot be added");
