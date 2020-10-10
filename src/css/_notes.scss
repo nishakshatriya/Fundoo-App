@@ -61,3 +61,34 @@ padding-top: 10px;
 input:focus, textarea:focus, select:focus{
     outline: none;
 }
+
+.main-card-div{
+padding-top: 15px;
+padding-bottom: 50px;
+  position: relative;
+  left:10%;
+  height: 75vh;
+  float: left;
+  display: flex;
+  width: 76%;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-basis: 33.333333%;
+  font-family: 'Roboto', sans-serif;
+} 
+
+.note-card-list{
+    border: 1px solid rgb(197, 195, 195);
+    padding: 35px 35px 1px 35px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    // margin-right: 2px;
+    // &hover:{
+   
+    // }
+}
+
+.note-card-list:hover{
+         box-shadow: 5px 10px 18px #888888;
+}
