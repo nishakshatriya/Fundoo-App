@@ -4,6 +4,7 @@ import { Snackbar, Typography } from "@material-ui/core";
 import AppBar from "../components/appBar";
 import MiniDrawer from "./drawer";
 import Notes from "../components/notes";
+import DynamicNotes from "../components/dynamicNotes";
 
 class Dashboard extends React.Component {
   state = {
@@ -57,6 +58,10 @@ class Dashboard extends React.Component {
           <Typography paragraph>
             <Notes/>
           </Typography>
+          <Typography paragraph>
+            <DynamicNotes/>
+          </Typography>
+          
         </main>
       </div>
     );

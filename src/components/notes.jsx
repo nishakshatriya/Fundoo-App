@@ -53,7 +53,7 @@ class Notes extends React.Component {
                 alert("Empty Note Cannot be added");
             }
 		},
-		window.location.reload()
+		// window.location.reload()
 
         ).catch((error) => {
             alert("Empty Note Cannot be added");
@@ -114,7 +114,7 @@ class Notes extends React.Component {
 							onClick={this.handleSubmit}>Close</Button>
 						</div>
 					</Card>
-					<DynamicNotes />
+					{/* <DynamicNotes /> */}
 				</Grid>
 			</Grid>
 		);

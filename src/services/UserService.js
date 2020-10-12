@@ -17,7 +17,6 @@ class Userservice {
 
     resetWithToken(user,token){
         return ApiCall(user, `${URL}/reset-password?access_token=${token}`,"POST","application/json");
-        // reset-password?access_token=${location.split("/")[2]}`,"POST"
     } 
 }
 export default new Userservice();
