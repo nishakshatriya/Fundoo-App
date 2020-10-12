@@ -175,8 +175,6 @@ class user extends Component {
 				snackbarStatus: true,
 			})
 		});
-
-		// (await this.validateInfo()) ? this.createUserAccount(userData.firstName) : this.createUserAccount();
 	};
 
 	handleSnackbarClose = (event, reason) => {
@@ -274,12 +272,6 @@ class user extends Component {
 												sorry, your username must be be between 6 and 30 characters long
 											</FormHelperText>
 										) : null}
-
-										{/* {this.props.emailHandleStatus === false ? (
-											<FormHelperText style={{ color: 'red' }} id="outlined-weight-helper-text">
-												That Username is taken, Try another
-											</FormHelperText>
-										) : null} */}
 									</FormControl>
 								</Grid>
 								<p className={classes.combinationText}>You can use letters, numbers and periods</p>

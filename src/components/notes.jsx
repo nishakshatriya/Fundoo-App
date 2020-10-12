@@ -11,8 +11,6 @@ import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
 import UndoOutlinedIcon from '@material-ui/icons/UndoOutlined';
 import RedoOutlinedIcon from '@material-ui/icons/RedoOutlined';
 import NoteServices from '../services/NoteServices';
-// import { response } from 'express';
-// import { ArtTrack } from '@material-ui/icons';
 
 const useStyles = (theme) => ({
 	Maincard: {
@@ -29,9 +27,6 @@ class Notes extends React.Component {
 		title: '',
 		description: '',
 	};
-
-
-	// const [note, setNote] = useState({ title: "", description: "" });
 
 	updateState = (event) => {
 		this.setState({ [event.target.name]: event.target.value });

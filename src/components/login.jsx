@@ -136,19 +136,12 @@ class LoginPage extends Component {
 				localStorage.setItem('firstName',response.data.firstName);
 				localStorage.setItem('lastName',response.data.lastName);
 
-				
-				// this.redirectToDashboardPg();
 				this.props.history.push('/dashboard');
 			}
 			let token = localStorage.getItem('token');
 			let email = localStorage.getItem('email');
 			let firstName = localStorage.getItem('firstName');
 			let lastName = localStorage.getItem('lastName');
-
-			console.log('token======>', token);
-			console.log('email======>', email);
-			console.log('firstName======>', firstName);
-			console.log('lastName======>', lastName);
 		});
 	};
 
