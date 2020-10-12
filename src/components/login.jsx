@@ -103,9 +103,9 @@ class LoginPage extends Component {
 		this.props.history.push('/forgotPassword');
 	};
 
-	redirectToDashboardPg = () => {
-		this.props.history.push('/dashboard');
-	};
+	// redirectToDashboardPg = () => {
+	// 	this.props.history.push('/dashboard');
+	// };
 
 	handleSubmit = async (event) => {
 		event.preventDefault();
@@ -122,24 +122,6 @@ class LoginPage extends Component {
 
 		console.log(userCredentials);
 
-		// localStorage.setItem('firstName', userCredentials.data.firstName);
-		// localStorage.setItem('lastName', userCredentials.data.lastName);
-		// localStorage.setItem('token', userCredentials.data.id);
-		// localStorage.setItem('email', userCredentials.data.email);
-
-		// await this.loginWithCredentials(userCredentials);
-
-		// loginWithCredentials(userCredentials, (message) => {
-		// 	this.setState({
-		// 		snackbarMessage: message,
-		// 		snackbarStatus: true,
-		// 	});
-		// 	console.log(userCredentials);
-		// 	if (message === 'Login Successful') {
-		// 		this.redirectToDashboardPg();
-		// 	}
-		// });
-
 			loginWithCredentials(userCredentials, (response) => {
 			let message;
 			if(response.data === undefined){
@@ -155,7 +137,8 @@ class LoginPage extends Component {
 				localStorage.setItem('lastName',response.data.lastName);
 
 				
-				this.redirectToDashboardPg();
+				// this.redirectToDashboardPg();
+				this.props.history.push('/dashboard');
 			}
 			let token = localStorage.getItem('token');
 			let email = localStorage.getItem('email');

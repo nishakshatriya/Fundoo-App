@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import '../css/_notes.scss';
-export default class GetNotes extends Component {
+export default class DynamicNotes extends Component {
 	state = {
 		note: null,
 	};
