@@ -15,6 +15,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import Snackbar from '@material-ui/core/Snackbar';
 import { resetWithToken } from '../services/UserServices';
 
+
 const useStyles = (theme) => ({
 	textField: {
 		width: '100%',

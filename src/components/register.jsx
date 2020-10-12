@@ -18,6 +18,7 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Snackbar from '@material-ui/core/Snackbar';
 import { createUserAccount } from '../services/UserServices';
+import Userservice from '../services/UserService';
 
 const styles = (theme) => ({
 	root: {
@@ -169,12 +170,13 @@ class user extends Component {
 		};
 
 		console.log('asdfg', userData);
-		await createUserAccount(userData , (message) => {
+		await Userservice.createUserAccount(userData , (response) => {
 			this.setState({
-				snackbarMessage: message,
+				snackbarMessage: response.message,
 				snackbarStatus: true,
 			})
 		});
+		this.props.history.push('/')
 	};
 
 	handleSnackbarClose = (event, reason) => {
