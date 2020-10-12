@@ -116,13 +116,13 @@ export default function MiniDrawer(props) {
       onMouseOver={(props.menuOpen)} onMouseOut={props.menuClose}
     >
       <div className={classes.toolbar}>
-        <IconButton onClick={props.menuClose}>
+        {/* <IconButton onClick={props.menuClose}>
           {theme.direction === "ltr" ? (
             <ChevronRightIcon />
           ) : (
             <ChevronLeftIcon />
           )}
-        </IconButton>
+        </IconButton> */}
       </div>
       <List className="list-icons">
       {['Notes', 'Reminders', 'nisha', 'Edit labels', 'Archive','Trash'].map((text, index) => (
