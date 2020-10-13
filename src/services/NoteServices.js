@@ -8,7 +8,11 @@ class NotesServices {
     }
 
     trashNote(data){
-        return ApiCall(data, `${URL}trashNotes?access_token=${token}`,"POST")
+        return ApiCall(data, `${URL}trashNotes?access_token=${token}`,"POST");
+    }
+
+    archiveNote(data){
+        return ApiCall(data, `${URL}archiveNotes?access_token=${token}`,"POST");
     }
     
 }

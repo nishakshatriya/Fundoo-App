@@ -23,7 +23,8 @@ const useStyles = (theme) => ({
 	state = {
 		note: null,
 		id:'',
-		isDeleted: false
+		isDeleted: false,
+		isArchived: false
 	};
 
 	async componentDidMount() {
@@ -46,14 +47,20 @@ const useStyles = (theme) => ({
         var noteData = { noteIdList: [data.id], isDeleted: true};
 		NoteServices.trashNote(noteData);
 		this.componentDidMount();
-    }
+	}
+	
+	archiveNote(data) {
+		var noteData = { noteIdList: [data.id], isArchived: true };
+		NoteServices.archiveNote(noteData);
+		this.componentDidMount();
+	}
 
 	render() {
 		return (
 			<div>
 				{this.state.note ? (
 					<div className="main-card-div">
-						{this.state.note.filter((data) => !data.isDeleted).map((data, index)=> {
+						{this.state.note.filter((data) => !data.isDeleted && !data.isArchived).map((data, index)=> {
 							const id = data.id;
 							return (
 								<div className="note-card-list">
@@ -70,7 +77,7 @@ const useStyles = (theme) => ({
 								<div className="icon">
 									<ColorLensOutlinedIcon />
 								</div>
-								<div className="icon">
+								<div className="icon" onClick={()=>this.archiveNote({id})}>
 									<ArchiveOutlinedIcon />
 								</div>
 								<div className="icon" onClick={()=>this.deleteNote({id})}>
