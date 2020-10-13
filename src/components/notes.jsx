@@ -22,6 +22,8 @@ const useStyles = (theme) => ({
 	},
 });
 
+
+
 class Notes extends React.Component {
 	state = {
 		title: '',
@@ -59,6 +61,7 @@ class Notes extends React.Component {
             alert("Empty Note Cannot be added");
         });
 	};
+
 
 	render() {
 		const { classes } = this.props;

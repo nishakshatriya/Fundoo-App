@@ -4,15 +4,26 @@ import AddAlertOutlinedIcon from '@material-ui/icons/AddAlertOutlined';
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import ColorLensOutlinedIcon from '@material-ui/icons/ColorLensOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
-import MoreVertOutlinedIcon from '@material-ui/icons/MoreVertOutlined';
-import UndoOutlinedIcon from '@material-ui/icons/UndoOutlined';
-import RedoOutlinedIcon from '@material-ui/icons/RedoOutlined';
-import NoteServices from '../services/NoteServices';
+import DeleteOutlineOutlinedIcon from '@material-ui/icons/DeleteOutlineOutlined';
 import { Grid,Card, Button} from '@material-ui/core';
+import { withStyles} from "@material-ui/core/styles";
 import '../css/_notes.scss';
-export default class DynamicNotes extends Component {
+import NoteServices from '../services/NoteServices';
+
+
+const useStyles = (theme) => ({
+
+	MuiSvgIcon: {
+		width:'0.5em',
+		height:'0.5em'
+	}
+});
+
+ class DynamicNotes extends Component {
 	state = {
 		note: null,
+		id:'',
+		isDeleted: false
 	};
 
 	async componentDidMount() {
@@ -26,16 +37,24 @@ export default class DynamicNotes extends Component {
 			.then((data) => {
 			 this.setState({ note: data.data.data });
 				console.log(this.state.note);
+				console.log("data=====>",data)
 			})
 			.catch((error) => console.log(error));
 	}
+
+	deleteNote(data) {
+        var noteData = { noteIdList: [data.id], isDeleted: true};
+		NoteServices.trashNote(noteData);
+		this.componentDidMount();
+    }
 
 	render() {
 		return (
 			<div>
 				{this.state.note ? (
 					<div className="main-card-div">
-						{this.state.note.map((data, index) => {
+						{this.state.note.filter((data) => !data.isDeleted).map((data, index)=> {
+							const id = data.id;
 							return (
 								<div className="note-card-list">
 									<h4> {data.title}</h4>
@@ -54,13 +73,10 @@ export default class DynamicNotes extends Component {
 								<div className="icon">
 									<ArchiveOutlinedIcon />
 								</div>
-								<div className="icon">
-									<MoreVertOutlinedIcon />
+								<div className="icon" onClick={()=>this.deleteNote({id})}>
+									<DeleteOutlineOutlinedIcon />
 								</div>
 							</div>
-							<Button className="close-button" 
-							type="submit"
-							onClick={this.handleSubmit}>Close</Button>
 						</div>
 								</div>
 								
@@ -74,3 +90,5 @@ export default class DynamicNotes extends Component {
 		);
 	}
 }
+
+export default withStyles(useStyles)(DynamicNotes);
